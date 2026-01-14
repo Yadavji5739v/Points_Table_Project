@@ -49,7 +49,7 @@ function renderTable(teams) {
       <div class="row">
         <div class="rank">${i + 1}</div>
         <div class="team">${t.name}</div>
-        <div class="cell">-</div>
+        <div class="cell">${t.booyah !== undefined ? t.booyah : '-'}</div>
         <div class="cell">${t.games}</div>
         <div class="cell">${t.pos}</div>
         <div class="cell">${t.kills}</div>
