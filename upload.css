@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Impact, Arial, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #b30000, #000 70%);
+  height: 100vh;
+}
+
+/* PAGE CENTER */
+.upload-page {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CARD */
+.upload-card {
+  background: rgba(0, 0, 0, 0.85);
+  border: 3px solid #ffcc33;
+  padding: 55px 65px;
+  width: 480px;              /* 🔥 slightly wider */
+  text-align: center;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+}
+
+/* MAIN TITLE */
+.upload-card h1 {
+  color: #ffcc33;
+  font-size: 56px;           /* 🔥 BIG TITLE */
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
+/* SUBTITLE */
+.subtitle {
+  color: #fff;
+  font-size: 24px;           /* 🔥 bigger subtitle */
+  margin-bottom: 36px;
+}
+
+/* FILE INPUT (CUSTOM) */
+input[type="file"] {
+  display: none;
+}
+
+.file-label {
+  display: block;
+  padding: 20px;             /* 🔥 bigger click area */
+  background: #222;
+  color: #fff;
+  border: 2px dashed #ffcc33;
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-size: 20px;           /* 🔥 bigger text */
+  letter-spacing: 1px;
+ says;
+}
+
+.file-label:hover {
+  background: #333;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 18px;             /* 🔥 bigger button */
+  background: #ffcc33;
+  border: none;
+  font-size: 26px;           /* 🔥 BIG CTA */
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 2px;
+}
+
+button:hover {
+  background: #ffdb66;
+}
+
+/* NOTE */
+.note {
+  margin-top: 20px;
+  font-size: 16px;           /* 🔥 readable note */
+  color: #aaa;
+}
