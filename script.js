@@ -57,4 +57,20 @@ function renderTable(teams) {
       </div>
     `;
   });
+
+  // Add download button functionality
+  const downloadBtn = document.getElementById("downloadBtn");
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", downloadImage);
+  }
+}
+
+function downloadImage() {
+  const poster = document.querySelector(".poster");
+  html2canvas(poster).then(canvas => {
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "standings.png";
+    link.click();
+  });
 }
