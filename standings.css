@@ -189,9 +189,10 @@ body {
 
 /* TEAM NAME */
 .team {
-  background: linear-gradient(to right, #e3bb1d, #e88c1c);
-  color: #000;
-  font-size: 24px;
+  background: linear-gradient(to right, #edb304, #f9eb24);
+  color: #0a0909;
+  font-size: 25px;
+  font-weight: 200;;
 }
 
 /* OTHER CELLS */
@@ -278,8 +279,28 @@ body {
 .download-wrapper {
   display: flex;
   justify-content: center;
+  gap: 20px;
   margin-top: 20px;
 }
+
+/* Upload More Button */
+.upload-btn {
+  background: #ffffff;
+  color: #c40000;
+  font-weight: 400;
+  font-size: 21px;
+  border: 2px solid #c40000;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-btn:hover {
+  background: #c40000;
+  color: #ffffff;
+}
+
 
 .download-btn {
   background: #ffcc33;
@@ -294,4 +315,34 @@ body {
 
 .download-btn:hover {
   background: #ffb800;
+}
+
+.reset-btn {
+  background: #ffffff;
+  color: #c40000;
+  font-weight: 400;
+  font-size: 21px;
+  border: 2px solid #c40000;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.reset-btn:hover {
+  background: #c40000;
+  color: #ffffff;
+}
+
+
+
+.booyah-input {
+  width: 50px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 24px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  outline: none;
 }
