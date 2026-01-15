@@ -72,7 +72,7 @@ button {
   background: #ffcc33;
   border: none;
   font-size: 26px;           /* 🔥 BIG CTA */
-  font-weight: bold;
+  font-weight: 500;
   cursor: pointer;
   letter-spacing: 2px;
 }
