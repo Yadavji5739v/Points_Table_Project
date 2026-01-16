@@ -52,7 +52,7 @@ body {
 }
 
 .standings-box {
-  background: #ffcc33;
+  background: #e6b932;
   color: #fff;
   font-size: 80px;
   font-weight: 300;
@@ -65,7 +65,7 @@ body {
   margin-top: 15px;
   width: 300px;
   height: 40px;
-  background: #ffcc33;
+  background: #e7bf71;
   margin-right: 80px;
   display: flex;
   align-items: center;
@@ -86,11 +86,11 @@ body {
     100px
     120px;
 
-  background: #ffd27a;
+  background: #e7bf71;
   height: 50px;
   padding: 0;
   font-size: 30px;
-  font-weight: 200;
+  font-weight: 50;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #000;
@@ -104,6 +104,9 @@ body {
   justify-content: center;
   text-align: center;
   margin-top: 0;
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-weight: 550;
+  letter-spacing: 0.8px;
 }
 
 .booyah {
@@ -119,7 +122,7 @@ body {
   height: 100%;
   padding: 5px 15px;
   font-size: 24px;
-  background: #ffcc33;
+  background: #e7bf71;
   color: #f8f8f8;
   border: none;
   font-weight: 300;
@@ -182,22 +185,122 @@ body {
 
 /* RANK */
 .rank {
-  background: #b10404;
+  background: #930202;
   color: #fff;
   font-size: 24px;
 }
 
 /* TEAM NAME */
 .team {
-  background: linear-gradient(to right, #edb304, #f9eb24);
-  color: #0a0909;
+  background: linear-gradient(to right, #ffffff, #3e3939);
+  color: #000000;
   font-size: 25px;
   font-weight: 200;;
 }
 
+
+/* ================= ROW-WISE SAME COLOR (PURE BLACK TEXT) ================= */
+
+/* Row 1 */
+.row:nth-child(1) > div:nth-child(2),
+.row:nth-child(1) > div:nth-child(4),
+.row:nth-child(1) > div:nth-child(6) {
+  background: #ffffff;
+  color: #000;
+}
+
+/* Row 2 */
+.row:nth-child(2) > div:nth-child(2),
+.row:nth-child(2) > div:nth-child(4),
+.row:nth-child(2) > div:nth-child(6) {
+  background: #f5f5f5;
+  color: #000;
+}
+
+/* Row 3 */
+.row:nth-child(3) > div:nth-child(2),
+.row:nth-child(3) > div:nth-child(4),
+.row:nth-child(3) > div:nth-child(6) {
+  background: #ededed;
+  color: #000;
+}
+
+/* Row 4 */
+.row:nth-child(4) > div:nth-child(2),
+.row:nth-child(4) > div:nth-child(4),
+.row:nth-child(4) > div:nth-child(6) {
+  background: #e4e4e4;
+  color: #000;
+}
+
+/* Row 5 */
+.row:nth-child(5) > div:nth-child(2),
+.row:nth-child(5) > div:nth-child(4),
+.row:nth-child(5) > div:nth-child(6) {
+  background: #dbdbdb;
+  color: #000;
+}
+
+/* Row 6 */
+.row:nth-child(6) > div:nth-child(2),
+.row:nth-child(6) > div:nth-child(4),
+.row:nth-child(6) > div:nth-child(6) {
+  background: #d2d2d2;
+  color: #000;
+}
+
+/* Row 7 */
+.row:nth-child(7) > div:nth-child(2),
+.row:nth-child(7) > div:nth-child(4),
+.row:nth-child(7) > div:nth-child(6) {
+  background: #c9c9c9;
+  color: #000;
+}
+
+/* Row 8 */
+.row:nth-child(8) > div:nth-child(2),
+.row:nth-child(8) > div:nth-child(4),
+.row:nth-child(8) > div:nth-child(6) {
+  background: #c0c0c0;
+  color: #000;
+}
+
+/* Row 9 */
+.row:nth-child(9) > div:nth-child(2),
+.row:nth-child(9) > div:nth-child(4),
+.row:nth-child(9) > div:nth-child(6) {
+  background: #b7b7b7;
+  color: #000;
+}
+
+/* Row 10 */
+.row:nth-child(10) > div:nth-child(2),
+.row:nth-child(10) > div:nth-child(4),
+.row:nth-child(10) > div:nth-child(6) {
+  background: #aeaeae;
+  color: #000;
+}
+
+/* Row 11 */
+.row:nth-child(11) > div:nth-child(2),
+.row:nth-child(11) > div:nth-child(4),
+.row:nth-child(11) > div:nth-child(6) {
+  background: #a5a5a5;
+  color: #000;
+}
+
+/* Row 12 */
+.row:nth-child(12) > div:nth-child(2),
+.row:nth-child(12) > div:nth-child(4),
+.row:nth-child(12) > div:nth-child(6) {
+  background: #9c9c9c;
+  color: #000;
+}
+
+
 /* OTHER CELLS */
 .cell {
-  background: #c10808;
+  background: #930202;
   color: #fff;
   font-size: 22px;
 }
@@ -346,3 +449,5 @@ body {
   color: #fff;
   outline: none;
 }
+
+
