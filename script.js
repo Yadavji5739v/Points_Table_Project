@@ -70,7 +70,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const teams = Object.values(data);
 
   // Sort by TOTAL points
-  teams.sort((a, b) => b.total - a.total);
+teams.sort((a, b) => {
+  // 1️⃣ Total points
+  if (b.total !== a.total) {
+    return b.total - a.total;
+  }
+
+  // 2️⃣ Elims / Kills
+  if (b.kills !== a.kills) {
+    return b.kills - a.kills;
+  }
+
+  // 3️⃣ (Optional) Alphabetical order
+  return a.name.localeCompare(b.name);
+});
+
 
   table.innerHTML = "";
 
