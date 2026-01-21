@@ -22,23 +22,34 @@ function proceed() {
 
 /* ==============================
    PROCESS LOG + MERGE DATA
+   + AUTO BOOYAH
 ============================== */
 function processLogAndStore(text) {
   const lines = text.split("\n");
   let teamsData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
+  let booyahGiven = false;
+
   lines.forEach(line => {
     if (!line.startsWith("TeamName:")) return;
 
-    const name = line.match(/TeamName:\s(.+?)\sRank:/)[1].trim();
-    const kills = +line.match(/KillScore:\s(\d+)/)[1];
-    const pos = +line.match(/RankScore:\s(\d+)/)[1];
-    const total = +line.match(/TotalScore:\s(\d+)/)[1];
+    const nameMatch = line.match(/TeamName:\s(.+?)\sRank/i);
+    const killMatch = line.match(/KillScore:\s(\d+)/i);
+    const rankMatch = line.match(/RankScore:\s(\d+)/i);
+    const totalMatch = line.match(/TotalScore:\s(\d+)/i);
+
+    // 🚨 prevent crash
+    if (!nameMatch || !killMatch || !rankMatch || !totalMatch) return;
+
+    const name = nameMatch[1].trim().toUpperCase();
+    const kills = +killMatch[1];
+    const pos = +rankMatch[1];
+    const total = +totalMatch[1];
 
     if (!teamsData[name]) {
       teamsData[name] = {
         name,
-        booyah: 0,   // ✅ default booyah
+        booyah: 0,
         games: 0,
         kills: 0,
         pos: 0,
@@ -50,18 +61,23 @@ function processLogAndStore(text) {
     teamsData[name].kills += kills;
     teamsData[name].pos += pos;
     teamsData[name].total += total;
+
+    // ✅ BOOYAH RULE (RankScore === 12)
+    if (pos === 12 && !booyahGiven) {
+      teamsData[name].booyah += 1;
+      booyahGiven = true;
+    }
   });
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(teamsData));
 }
+
 
 /* ==============================
    STANDINGS PAGE
 ============================== */
 document.addEventListener("DOMContentLoaded", () => {
   const table = document.getElementById("tableBody");
-
-  // Not on standings page
   if (!table) return;
 
   const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -69,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const teams = Object.values(data);
 
-  // Sort by TOTAL points
+  // Sort by TOTAL score
   teams.sort((a, b) => b.total - a.total);
 
   table.innerHTML = "";
@@ -80,16 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="rank">${i + 1}</div>
         <div class="team">${t.name}</div>
 
-        <!-- BOOYAH INPUT -->
-        <div class="cell">
-          <input 
-            type="number" 
-            min="0" 
-            value="${t.booyah || 0}"
-            class="booyah-input"
-            data-team="${t.name}"
-          />
-        </div>
+        <!-- BOOYAH DISPLAY (NO INPUT) -->
+        <div class="cell booyah-count">${t.booyah || 0}</div>
 
         <div class="cell">${t.games}</div>
         <div class="cell">${t.pos}</div>
@@ -97,22 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="cell">${t.total}</div>
       </div>
     `;
-  });
-
-  /* ==============================
-     🔥 BOOYAH INPUT HANDLER (NEW)
-  ============================== */
-  document.querySelectorAll(".booyah-input").forEach(input => {
-    input.addEventListener("input", e => {
-      const teamName = e.target.dataset.team;
-      const value = parseInt(e.target.value) || 0;
-
-      let storedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-      if (storedData[teamName]) {
-        storedData[teamName].booyah = value;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(storedData));
-      }
-    });
   });
 
   /* DOWNLOAD BUTTON */
@@ -202,3 +194,4 @@ function resetStandings() {
   localStorage.removeItem(STORAGE_KEY);
   window.location.href = "index.html";
 }
+
