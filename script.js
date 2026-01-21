@@ -70,21 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const teams = Object.values(data);
 
   // Sort by TOTAL points
-teams.sort((a, b) => {
-  // 1️⃣ Total points
-  if (b.total !== a.total) {
-    return b.total - a.total;
-  }
-
-  // 2️⃣ Elims / Kills
-  if (b.kills !== a.kills) {
-    return b.kills - a.kills;
-  }
-
-  // 3️⃣ (Optional) Alphabetical order
-  return a.name.localeCompare(b.name);
-});
-
+  teams.sort((a, b) => b.total - a.total);
 
   table.innerHTML = "";
 
@@ -160,16 +146,50 @@ function downloadImage() {
   // Hide buttons
   elementsToHide.forEach(el => el.style.display = "none");
 
-  html2canvas(poster).then(canvas => {
+  // 🔥 STEP 1: Replace inputs with text
+  const inputs = poster.querySelectorAll("input");
+  const inputReplacements = [];
+
+  inputs.forEach(input => {
+    const span = document.createElement("span");
+
+    span.innerText = (input.value || "").toUpperCase(); // FORCE UPPERCASE
+    span.className = input.className;
+
+    // copy font styles (important)
+    const style = window.getComputedStyle(input);
+    span.style.fontSize = style.fontSize;
+    span.style.fontWeight = style.fontWeight;
+    span.style.textAlign = style.textAlign;
+    span.style.width = style.width;
+    span.style.display = "inline-block";
+
+    inputReplacements.push({
+      parent: input.parentNode,
+      input: input,
+      span: span
+    });
+
+    input.parentNode.replaceChild(span, input);
+  });
+
+  // 🔥 STEP 2: Capture image
+  html2canvas(poster, { scale: 2 }).then(canvas => {
     const link = document.createElement("a");
     link.href = canvas.toDataURL("image/png");
     link.download = "ff-standings.png";
     link.click();
 
+    // 🔁 STEP 3: Restore inputs back
+    inputReplacements.forEach(item => {
+      item.parent.replaceChild(item.input, item.span);
+    });
+
     // Show buttons again
     elementsToHide.forEach(el => el.style.display = "flex");
   });
 }
+
 
 
 /* ==============================
