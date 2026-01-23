@@ -1,0 +1,411 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Impact, Arial, sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* POSTER */
+.poster.horizontal {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: url("assets/background.png") center / cover no-repeat;
+  overflow: visible;
+}
+.content {
+  width: 1920px;
+  height: 1080px;
+  margin: auto;
+  position: relative;
+
+  /* 🔥 ADD THIS */
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.asia-logo {
+  width: 220px;
+}
+.standings-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* 🔥 center contents */
+  justify-content: center;
+  margin: 0 auto;  
+  transform: translateX(-100px);
+  justify-self: center; 
+  gap : 5px;        /* 🔥 center block itself */
+}
+
+
+.standings-box {
+  color: #fff;
+  font-size: 80px;
+  font-weight: : 500;\
+  letter-spacing: 3px;
+  line-height:1.1;
+  padding: 18px 70px;
+  
+  text-transform: uppercase;
+}
+
+.standings-underline {
+  margin-top: 18px;
+  width: 380px;
+  height: 50px;
+  background: #e7bf71;
+}
+
+.user-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  font-size: 37px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* TABLES */
+.tables-wrapper {
+  position: relative;
+  top: -30px;   /* 🔥 moves table UP */
+}
+
+
+.table-block {
+  flex: 1;
+  width:1000px
+}
+
+/* TABLE HEADER */
+.table-head {
+  display: grid;
+  grid-template-columns: 95px 350px 90px 100px 100px 100px 135px;
+  background: #e7bf71;
+  font-size: 30px;
+  height: 67px
+  text-align: center;
+  font-weight: 200;
+  padding: 10px 0;
+  font-family: "Times New Roman", serif;
+
+}
+
+/* TABLE HEADER TEXT STYLE */
+.table-head > div {
+  font-size: 35px;      /* 🔥 increase text size */
+  font-weight: 400;    /* 🔥 boldness (700–900) */
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+/* 🔥 BOOYAH ICON SIZE (FORCE) */
+img.booyah {
+  width: 62px !important;   /* increase more if needed */
+  height: auto !important;
+  max-width: none !important;
+}
+
+
+/* ROWS */
+.row {
+  display: grid;
+  grid-template-columns: 80px 1fr 80px 100px 100px 100px 120px;
+  height: 50px;
+  margin-top: 6px;
+}
+
+.rank,
+.cell {
+  background: #930202;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+.team {
+  background: linear-gradient(to right, #fff, #3e3939);
+  color: #000;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-size: 28px;
+}
+/* Row 1 – Pure White */
+.row:nth-child(1) > div:nth-child(2),
+.row:nth-child(1) > div:nth-child(4),
+.row:nth-child(1) > div:nth-child(6) {
+  background: #ffffff;
+  color: #000;
+}
+
+/* Row 2 */
+.row:nth-child(2) > div:nth-child(2),
+.row:nth-child(2) > div:nth-child(4),
+.row:nth-child(2) > div:nth-child(6) {
+  background: #f2f2f2;
+  color: #000;
+}
+
+/* Row 3 */
+.row:nth-child(3) > div:nth-child(2),
+.row:nth-child(3) > div:nth-child(4),
+.row:nth-child(3) > div:nth-child(6) {
+  background: #e5e5e5;
+  color: #000;
+}
+
+/* Row 4 */
+.row:nth-child(4) > div:nth-child(2),
+.row:nth-child(4) > div:nth-child(4),
+.row:nth-child(4) > div:nth-child(6) {
+  background: #d6d6d6;
+  color: #000;
+}
+
+/* Row 5 */
+.row:nth-child(5) > div:nth-child(2),
+.row:nth-child(5) > div:nth-child(4),
+.row:nth-child(5) > div:nth-child(6) {
+  background: #c6c6c6;
+  color: #000;
+}
+
+/* Row 6 */
+.row:nth-child(6) > div:nth-child(2),
+.row:nth-child(6) > div:nth-child(4),
+.row:nth-child(6) > div:nth-child(6) {
+  background: #b6b6b6;
+  color: #000;
+}
+
+/* Row 7 */
+.row:nth-child(7) > div:nth-child(2),
+.row:nth-child(7) > div:nth-child(4),
+.row:nth-child(7) > div:nth-child(6) {
+  background: #a5a5a5;
+  color: #000;
+}
+
+/* Row 8 */
+.row:nth-child(8) > div:nth-child(2),
+.row:nth-child(8) > div:nth-child(4),
+.row:nth-child(8) > div:nth-child(6) {
+  background: #949494;
+  color: #000;
+}
+
+/* Row 9 – Light Dark Grey (NOT black) */
+.row:nth-child(9) > div:nth-child(2),
+.row:nth-child(9) > div:nth-child(4),
+.row:nth-child(9) > div:nth-child(6) {
+  background: #838383;
+  color: #000;
+}
+
+
+
+/* FOOTER */
+.partner-strip {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #930202);
+  padding: 0 30px;
+}
+
+.partner-box {
+  display: flex;
+  gap: 14px;
+  color: #fff;
+}
+
+.partner-box span {
+  font-size: 40px;     /* 🔥 bigger & bold */
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+
+.partner-box img {
+  height: 112px;
+}
+
+/* BUTTONS */
+.download-wrapper {
+  position: absolute;
+  bottom: 110px;          /* 👈 ABOVE FOOTER */
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 20px;
+  z-index: 5;
+}
+
+
+
+.tables-wrapper {
+  display: flex;
+  justify-content: center; /* move block to right */
+  gap: 100px;                 /* equal gap between tables */
+  width: 70%;
+  transform: translate(360px);
+}
+
+
+
+.table-block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+}
+
+#leftTable,
+#rightTable {
+  flex: 1;
+  overflow: hidden;
+}
+.row {
+  height: 72px;               /* 👈 LOCKED */
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+
+
+
+
+.booyah {
+  width: 50px;        /* 🔥 PERFECT SIZE */
+  height: auto;
+  display: block;
+  margin: 0 auto;     /* horizontal center */
+}
+/* Center all cells properly */
+.table-head > div,
+.row > div {
+  padding-top: 6px;
+  padding-bottom: 6px;
+
+  display: flex;
+  align-items: center;     /* vertical center */
+  justify-content: center; /* horizontal center */
+}
+
+/* Team name left aligned */
+.row > .team {
+  justify-content: flex-start;
+  padding-left: 12px;
+}
+.table-head,
+.row {
+  display: grid;
+  grid-template-columns:
+    80px     /* RANK */
+    400px    /* 🔥 TEAM NAME (REDUCED) */
+    80px     /* BOOYAH */
+    110px     /* GAMES */
+    110px     /* POS */
+    110px     /* ELIMS */
+    130px;   /* TOTAL */
+}
+
+
+
+
+
+
+/* Upload More Button */
+.upload-btn {
+  background: #ffffff;
+  color: #c40000;
+  font-weight: 400;
+  font-size: 21px;
+  border: 2px solid #c40000;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-btn:hover {
+  background: #c40000;
+  color: #ffffff;
+}
+
+
+.download-btn {
+  background: #ffcc33;
+  color: #000;
+  border: none;
+  padding: 14px 28px;
+  font-size: 24px;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.download-btn:hover {
+  background: #ffb800;
+}
+
+.reset-btn {
+  background: #ffffff;
+  color: #c40000;
+  font-weight: 400;
+  font-size: 21px;
+  border: 2px solid #c40000;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.reset-btn:hover {
+  background: #c40000;
+  color: #ffffff;
+}
+
+
+
+
+#export-area {
+  width: 1920px;
+  height: 1080px;
+  background: url("assets/background.png") center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
