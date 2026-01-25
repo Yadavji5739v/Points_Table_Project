@@ -96,19 +96,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!data) return;
 
   const teams = Object.values(data).sort((a, b) => {
-  // 1️⃣ Sort by TOTAL points
+
+  // 1️⃣ TOTAL POINTS (highest first)
   if (b.total !== a.total) {
     return b.total - a.total;
   }
 
-  // 2️⃣ If TOTAL same, sort by ELIMS (kills)
+  // 2️⃣ BOOYAH COUNT (official FF tiebreaker)
+  if ((b.booyah || 0) !== (a.booyah || 0)) {
+    return (b.booyah || 0) - (a.booyah || 0);
+  }
+
+  // 3️⃣ ELIMINATIONS (kills)
   if (b.kills !== a.kills) {
     return b.kills - a.kills;
   }
 
-  // 3️⃣ Optional: keep stable order if still same
   return 0;
 });
+
 
   /* =====================
      NORMAL (standings.html)
