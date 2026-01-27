@@ -20,9 +20,11 @@ function proceed() {
 
     // 🔥 ROUTING LOGIC
     if (teamCount > 12) {
-      window.location.href = "bg.html";
+      window.location.href = "/bg.html";
+
     } else {
-      window.location.href = "standings.html";
+     window.location.href = "/standings.html";
+
     }
   };
 
@@ -93,7 +95,11 @@ function processLogAndStore(text) {
 document.addEventListener("DOMContentLoaded", () => {
 
   const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  if (!data) return;
+  if (!data || Object.keys(data).length === 0) {
+  alert("No data found. Please upload a file first.");
+  return;
+}
+
 
   const teams = Object.values(data).sort((a, b) => {
 
