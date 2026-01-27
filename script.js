@@ -93,7 +93,10 @@ function processLogAndStore(text) {
 document.addEventListener("DOMContentLoaded", () => {
 
   const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  if (!data) return;
+  if (!data || Object.keys(data).length === 0) {
+    window.location.href = "/";
+    return;
+  }
 
   const teams = Object.values(data).sort((a, b) => {
 
