@@ -47,7 +47,16 @@ body {
   align-items: center;
 }
 
-
+.asia-logo {
+  width: 220px;
+  margin-left: 150px;
+}
+.partner-box:first-child {
+  margin-left: 150px;
+}
+.partner-box:last-child {
+  transform: translateX(-165px);
+}
 .standings-wrapper {
   display: flex;
   flex-direction: column;
