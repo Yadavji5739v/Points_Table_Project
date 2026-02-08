@@ -148,7 +148,7 @@ img.booyah {
 
 .rank,
 .cell {
-  background: #930202;
+  background: #bb0404;
   color: #fff;
   display: flex;
   align-items: center;
@@ -247,7 +247,7 @@ img.booyah {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, #930202);
+  background: linear-gradient(to right, #d90505);
   padding: 0 30px;
 }
 
