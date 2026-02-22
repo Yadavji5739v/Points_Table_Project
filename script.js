@@ -20,11 +20,9 @@ function proceed() {
 
     // 🔥 ROUTING LOGIC
     if (teamCount > 12) {
-      window.location.href = "/bg.html";
-
+      window.location.href = "bg.html";
     } else {
-     window.location.href = "/standings.html";
-
+      window.location.href = "standings.html";
     }
   };
 
