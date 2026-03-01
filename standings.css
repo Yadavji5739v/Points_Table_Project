@@ -18,8 +18,9 @@ body {
 /* ================= POSTER ================= */
 
 .poster {
-  width: 908px;
-  height: 1205px;
+  /* match updated background size 1080×1350 */
+  width: 1080px;
+  height: 1350px;
   padding: 30px;
   padding-bottom: 120px;   /* EXACT footer space */
 
@@ -34,69 +35,153 @@ body {
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  margin-bottom: 20px;
+  margin: 150px 0 20px; /* add top spacing to move input lower */
 }
 
-.asia-logo {
-  width: 180px;
+.top-header {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+/* Left logos container */
+.left-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Small left logos */
+.small-logo {
+  height: 100px;
+  object-fit: contain;
+  margin-left: -18px;
+  margin-top: -12px;
+}
+.small-logo1 {
+  height: 100px;
+  object-fit: contain;
+  margin-left: 10px;
+  margin-top: -12px;
+}
+.center-logo {
+  height: 350px;
+  object-fit: contain;
+  padding-left: 120px; /* add space between center logo and left logos */
+  padding-bottom: -30px;
+  padding-bottom: 20px;
+}
+
+/* Right logo */
+.right-logo {
+  height: 150px;
+  object-fit: contain;
+  padding-left: 145px; /* push right logo further right */
+  margin-top: -60px; /* adjust vertical position of right logo */
+ 
 }
 
 /* STANDINGS TITLE */
 .standings-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  margin-right: 120px;
-}
-
-.standings-box {
-  background: #C6A15A;
-  color: #fff;
-  font-size: 80px;
-  font-weight: 300;
-  letter-spacing: 1px;
-  padding: 20px 60px;
-  line-height: 1;
-}
-
-.standings-underline {
-  margin-top: 15px;
-  width: 300px;
-  height: 40px;
-  background: #B98F3F;
-  margin-right: 80px;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  margin: 0 120px;
 }
+
+/* title hidden, keep styles in case needed */
+.standings-box {
+  display: none;
+}
+
+.standings-input {
+  margin-top: 10px;
+}
+
+.user-input {
+  width: 800px;
+  padding: 14px 20px;
+  font-size: 64px;
+  background: transparent;   /* transparent background */
+  color: #ffffff;            /* keep text visible */
+  border: none;
+  font-weight: 750;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 6px;
+  margin-top: 110px;
+  position: relative;
+  z-index: 9999;
+
+}
+.user-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* top logos (left-aligned) */
+.top-logos {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.top-logos .header-logo {
+  height: 90px;
+  object-fit: contain;
+}
+/* underline/input removed from new header design */
 
 /* ================= TABLE HEADER ================= */
 
 .table-head {
-  margin-top: 20px;
+  margin-top: 5px;
   display: grid;
   grid-template-columns:
     80px
     1fr
     80px
-    100px
+
     120px
     100px
     120px;
+  column-gap: 20px; /* keep gap for bridge effect */
+}
 
-  background: #B98F3F;
-  height: auto;                 /* remove fixed height */
-  padding-top: 6px;
-  padding-bottom: 14px; 
-  padding: 0;
-  font-size: 28px;
+.table-head > div {
+  padding: 10px 0;
+  border-radius: 20px;
+  font-size: 29px;
   font-weight: 500;
-  letter-spacing: 0.9px;
   text-transform: uppercase;
-  color: #000;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  
+}
+
+/* header pills: rank, team, pos, total orange; others yellow */
+.table-head > div:nth-child(1),
+.table-head > div:nth-child(2),
+.table-head > div:nth-child(4),
+.table-head > div:nth-child(6) {
+  background: #f1c832d4;
+  color: #fff;
+}
+
+.table-head > div:nth-child(3),
+.table-head > div:nth-child(5){
+  background: #f07f0f;
+  color: #000;
 }
 
 /* Center header text */
@@ -121,26 +206,7 @@ body {
 
 /* ================= USER INPUT IN YELLOW STRIP ================= */
 
-.user-input {
-  width: 95%;
-  height: 100%;
-  padding: 5px 15px;
-  font-size: 24px;
-  background: #B98F3F;
-  color: #2a2a2a;
-  border: none;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.user-input::placeholder {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.user-input:focus {
-  outline: none;
-}
+/* removed unused search/input field styles */
 
 /* ================= USER INPUT SECTION ================= */
 
@@ -154,7 +220,7 @@ body {
 /* ================= TABLE BODY ================= */
 
 .table-body {
-  margin-top: 100px;
+  margin-top: 350px; /* push table even further down */
 }
 
 /* ROW */
@@ -164,19 +230,20 @@ body {
     80px
     1fr
     80px
-    100px
     120px
     100px
     120px;
+  column-gap: 20px; /* gap between rank and team */
   height: 55px;
-  margin-bottom: 8px;
-  margin-top: 8px;
-  border-bottom: 4px solid #fff;
+  margin: 8px 0;
+  /* rows should be solid yellow now */
+  background: #f1c832d4;
+  border-radius: 30px;
 }
 
 /* First row gets extra margin */
 .row:first-child {
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 /* Center all row cells */
@@ -185,20 +252,30 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  background: transparent;
 }
 
-/* RANK */
-.rank {
-  background: #c16903;
+/* highlight specific columns with orange pills: rank, team, pos, total */
+.row > div:nth-child(1),
+.row > div:nth-child(2),
+.row > div:nth-child(4),
+.row > div:nth-child(6) {
+  background: linear-gradient(90deg, #ea5c04, #fcba04, #ea5c04);
   color: #fff;
-  font-size: 24px;
+  border-radius: 15px;
+  padding: 0 6px;
 }
 
-/* TEAM NAME */
-.team {
-  background: linear-gradient(to right, #ffffff, #3e3939);
+/* RANK (pill already handled above) */
+.rank {
   color: #000000;
-  font-size: 29px;
+  font-size: 30px;
+}
+
+/* TEAM NAME (pill already handled above) */
+.team {
+  color: #fff;
+  font-size: 32px;
   font-weight: 300;
   letter-spacing: 1px;
 }
@@ -206,137 +283,35 @@ body {
 
 /* ================= ROW-WISE SAME COLOR (PURE BLACK TEXT) ================= */
 
-/* Row 1 */
-.row:nth-child(1) > div:nth-child(2),
-.row:nth-child(1) > div:nth-child(4),
-.row:nth-child(1) > div:nth-child(6) {
-  background: #ffffff;
-  color: #000;
-}
-
-/* Row 2 */
-.row:nth-child(2) > div:nth-child(2),
-.row:nth-child(2) > div:nth-child(4),
-.row:nth-child(2) > div:nth-child(6) {
-  background: #f5f5f5;
-  color: #000;
-}
-
-/* Row 3 */
-.row:nth-child(3) > div:nth-child(2),
-.row:nth-child(3) > div:nth-child(4),
-.row:nth-child(3) > div:nth-child(6) {
-  background: #ededed;
-  color: #000;
-}
-
-/* Row 4 */
-.row:nth-child(4) > div:nth-child(2),
-.row:nth-child(4) > div:nth-child(4),
-.row:nth-child(4) > div:nth-child(6) {
-  background: #e4e4e4;
-  color: #000;
-}
-
-/* Row 5 */
-.row:nth-child(5) > div:nth-child(2),
-.row:nth-child(5) > div:nth-child(4),
-.row:nth-child(5) > div:nth-child(6) {
-  background: #dbdbdb;
-  color: #000;
-}
-
-/* Row 6 */
-.row:nth-child(6) > div:nth-child(2),
-.row:nth-child(6) > div:nth-child(4),
-.row:nth-child(6) > div:nth-child(6) {
-  background: #d2d2d2;
-  color: #000;
-}
-
-/* Row 7 */
-.row:nth-child(7) > div:nth-child(2),
-.row:nth-child(7) > div:nth-child(4),
-.row:nth-child(7) > div:nth-child(6) {
-  background: #c9c9c9;
-  color: #000;
-}
-
-/* Row 8 */
-.row:nth-child(8) > div:nth-child(2),
-.row:nth-child(8) > div:nth-child(4),
-.row:nth-child(8) > div:nth-child(6) {
-  background: #c0c0c0;
-  color: #000;
-}
-
-/* Row 9 */
-.row:nth-child(9) > div:nth-child(2),
-.row:nth-child(9) > div:nth-child(4),
-.row:nth-child(9) > div:nth-child(6) {
-  background: #b7b7b7;
-  color: #000;
-}
-
-/* Row 10 */
-.row:nth-child(10) > div:nth-child(2),
-.row:nth-child(10) > div:nth-child(4),
-.row:nth-child(10) > div:nth-child(6) {
-  background: #aeaeae;
-  color: #000;
-}
-
-/* Row 11 */
-.row:nth-child(11) > div:nth-child(2),
-.row:nth-child(11) > div:nth-child(4),
-.row:nth-child(11) > div:nth-child(6) {
-  background: #a5a5a5;
-  color: #000;
-}
-
-/* Row 12 */
-.row:nth-child(12) > div:nth-child(2),
-.row:nth-child(12) > div:nth-child(4),
-.row:nth-child(12) > div:nth-child(6) {
-  background: #9c9c9c;
-  color: #000;
-}
+/* alternating background colors disabled; rows now use a uniform orange gradient */
+/* styles above for individual rows have been commented out */
 
 
 /* OTHER CELLS */
 .cell {
-  background: #c16903;
-  color: #fff;
-  font-size: 28px;
+  background: transparent;
+  color: #000;
+  font-size: 32px;
 }
 
 /* ================= PARTNER STRIP ================= */
 
 .partner-strip {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
   width: 100%;
-  height: 110px;
-
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+}
 
-  background: linear-gradient(
-    to right,
-    #c16903,
-    #f08306,
-    #b76202
-  );
-
+.partner-strip .partner-box img {
+  height: 80px;
+  object-fit: contain;
 }
 
 
 /* EACH PARTNER */
-.partner-box {
+/* .partner-box {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -359,17 +334,18 @@ body {
   object-fit: contain;
 }
 /* FOOTER ICON BASE */
-.partner-box img {
+/* .partner-box img {
   object-fit: contain;
   display: block;
-}
+} */
 
 /* Managing Partner (UG – circular) */
+/*
 .partner-box.managing img {
   width: auto;
   height: 110px;
   /* border-radius: 50%; */
-}
+
 
 /* Presented By (Monster – shield) */
 .partner-box.presented img {
@@ -461,4 +437,4 @@ body {
 
 .table-head > div:nth-child(1) {
   letter-spacing: -0.5px;
-}
+} */
