@@ -19,7 +19,7 @@ body {
 
 .poster {
   /* match updated background size 1080×1350 */
-  width: 1080px;
+  width: 980px;
   height: 1350px;
   padding: 30px;
   padding-bottom: 120px;   /* EXACT footer space */
@@ -68,13 +68,16 @@ body {
 .small-logo1 {
   height: 100px;
   object-fit: contain;
+  margin-right: -40px;
   margin-left: 10px;
   margin-top: -12px;
+ 
 }
+
 .center-logo {
   height: 350px;
   object-fit: contain;
-  padding-left: 120px; /* add space between center logo and left logos */
+  padding-left: 110px; /* add space between center logo and left logos */
   padding-bottom: -30px;
   padding-bottom: 20px;
 }
@@ -83,7 +86,7 @@ body {
 .right-logo {
   height: 150px;
   object-fit: contain;
-  padding-left: 145px; /* push right logo further right */
+  padding-left: 120px; /* push right logo further right */
   margin-top: -60px; /* adjust vertical position of right logo */
  
 }
@@ -106,7 +109,7 @@ body {
 }
 
 .user-input {
-  width: 800px;
+  width: 700px;
   padding: 14px 20px;
   font-size: 64px;
   background: transparent;   /* transparent background */
