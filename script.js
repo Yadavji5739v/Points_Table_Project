@@ -51,11 +51,6 @@ function processLogAndStore(text) {
 
     const name = nameMatch[1].trim().toUpperCase();
 
-    // 🚫 Ignore NEW teams beyond 18, but DO NOT STOP
-    if (!teamsData[name] && Object.keys(teamsData).length >= 18) {
-      return;
-    }
-
     if (!teamsData[name]) {
       teamsData[name] = {
         name,
@@ -132,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="rank">${i + 1}</div>
           <div class="team">${t.name}</div>
           <div class="cell">${t.booyah || 0}</div>
-          <div class="cell">${t.games}</div>
+          <!-- games column removed -->
           <div class="cell">${t.pos}</div>
           <div class="cell">${t.kills}</div>
           <div class="cell">${t.total}</div>
@@ -151,8 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     left.innerHTML = "";
     right.innerHTML = "";
 
-    const maxTeams = 18;
-const safeTeams = teams.slice(0, maxTeams);
+    const safeTeams = teams;
 
 const leftCount = Math.ceil(safeTeams.length / 2);
 const leftTeams = safeTeams.slice(0, leftCount);
@@ -165,7 +159,7 @@ const rightTeams = safeTeams.slice(leftCount);
             <div class="rank">${offset + i + 1}</div>
             <div class="team">${t.name}</div>
             <div class="cell">${t.booyah || 0}</div>
-            <div class="cell">${t.games}</div>
+            <!-- games removed -->
             <div class="cell">${t.pos}</div>
             <div class="cell">${t.kills}</div>
             <div class="cell">${t.total}</div>
