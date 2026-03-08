@@ -24,12 +24,12 @@ body {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background: url("assets/background.png") center / cover no-repeat;
+  background: url("assets/bg.png") center / cover no-repeat;
   overflow: visible;
 }
 .content {
-  width: 1920px;
-  height: 1080px;
+  width: 1536px;
+  height: 1024px;
   margin: auto;
   position: relative;
 
