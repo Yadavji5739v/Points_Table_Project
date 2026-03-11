@@ -19,7 +19,7 @@ function proceed() {
     const teamCount = Object.keys(teamsData).length;
 
     // 🔥 ROUTING LOGIC
-    if (teamCount > 12) {
+    if (teamCount > 13) {
       window.location.href = "bg.html";
     } else {
       window.location.href = "standings.html";
@@ -115,7 +115,7 @@ const teams = Object.values(data)
   const table = document.getElementById("tableBody");
   if (table) {
     table.innerHTML = "";
-    teams.slice(0, 12).forEach((t, i) => {
+    teams.slice(0, 13).forEach((t, i) => {
       table.innerHTML += buildRow(i + 1, t);
     });
   }
