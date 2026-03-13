@@ -28,8 +28,8 @@ body {
   overflow: visible;
 }
 .content {
-  width: 1536px;
-  height: 1024px;
+  width: 1920px;
+  height: 1080px;
   margin: auto;
   position: relative;
 
@@ -70,6 +70,7 @@ body {
 
 
 .standings-box {
+  background: #C6A15A;
   color: #fff;
   font-size: 80px;
   font-weight: : 500;\
@@ -84,7 +85,7 @@ body {
   margin-top: 18px;
   width: 380px;
   height: 50px;
-  background: #e7bf71;
+  background: #B98F3F;
 }
 
 .user-input {
@@ -113,7 +114,7 @@ body {
 .table-head {
   display: grid;
   grid-template-columns: 95px 350px 90px 100px 100px 100px 135px;
-  background: #e7bf71;
+  background: #B98F3F;
   font-size: 30px;
   height: 67px
   text-align: center;
@@ -144,11 +145,12 @@ img.booyah {
   grid-template-columns: 80px 1fr 80px 100px 100px 100px 120px;
   height: 50px;
   margin-top: 6px;
+  border-bottom: 4px solid #fff;
 }
 
 .rank,
 .cell {
-  background: #bb0404;
+  background: #c16903;
   color: #fff;
   display: flex;
   align-items: center;
@@ -245,11 +247,16 @@ img.booyah {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 110px;
+  height: 130px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, #d90505);
+  background: linear-gradient(
+    to right,
+    #c16903,
+    #f08306,
+    #b76202
+  );
   padding: 0 30px;
 }
 
@@ -271,6 +278,19 @@ img.booyah {
   height: 112px;
 }
 
+/* Platform partner larger display */
+.partner-box.platform img {
+  width: auto;
+  height: 150px;
+  object-fit: contain;
+}
+
+/* Larger managing partner logo (keeps proportions) */
+.partner-box.managing img {
+  width: auto;
+  height: 120px;
+}
+
 /* BUTTONS */
 .download-wrapper {
   position: absolute;
@@ -280,7 +300,7 @@ img.booyah {
 
   display: flex;
   gap: 20px;
-  z-index: 5;
+  z-index: 10;
 }
 
 
@@ -360,10 +380,10 @@ img.booyah {
 /* Upload More Button */
 .upload-btn {
   background: #ffffff;
-  color: #c40000;
+  color: #A90F0F;
   font-weight: 400;
   font-size: 21px;
-  border: 2px solid #c40000;
+  border: 2px solid #A90F0F;
   padding: 12px 22px;
   border-radius: 6px;
   cursor: pointer;
@@ -371,13 +391,13 @@ img.booyah {
 }
 
 .upload-btn:hover {
-  background: #c40000;
+  background: #A90F0F;
   color: #ffffff;
 }
 
 
 .download-btn {
-  background: #ffcc33;
+  background: #C6A15A;
   color: #000;
   border: none;
   padding: 14px 28px;
@@ -388,15 +408,15 @@ img.booyah {
 }
 
 .download-btn:hover {
-  background: #ffb800;
+  background: #B98F3F;
 }
 
 .reset-btn {
   background: #ffffff;
-  color: #c40000;
+  color: #A90F0F;
   font-weight: 400;
   font-size: 21px;
-  border: 2px solid #c40000;
+  border: 2px solid #A90F0F;
   padding: 12px 22px;
   border-radius: 6px;
   cursor: pointer;

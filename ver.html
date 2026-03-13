@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FF Points Table</title>
+  <link rel="stylesheet" href="ver.css">
+</head>
+<body>
+
+<div class="poster">
+
+  <!-- BACKGROUND -->
+  <img src="assets/new.png" class="bg-img" alt="">
+
+  <!-- TOP-LEFT: 2 logos -->
+  <div class="top-left-logos">
+    <img src="assets/platform-partner.png" class="small-logo" alt="logo1">
+    <img src="assets/presentedby.png"      class="small-logo" alt="logo2">
+  </div>
+
+  <!-- TOP-RIGHT: Playden -->
+  <div class="top-right-logo">
+    <img src="assets/managing-partner.png" class="right-logo" alt="playden">
+  </div>
+
+  <!-- TITLE -->
+  <div class="title-area">
+    <input type="text" id="userInput" class="user-input" value="POINTS TABLE" placeholder="POINTS TABLE">
+  </div>
+
+  <!-- TABLE HEADER -->
+  <div class="table-head">
+    <div>RANK</div>
+    <div>TEAM NAME</div>
+    <div>MATCHES</div>
+    <div>BOOYAH</div>
+    <div>RANK PTS</div>
+    <div>KILL PTS</div>
+    <div>TOTAL</div>
+  </div>
+
+  <!-- TABLE BODY — built by script.js -->
+  <div id="tableBody"></div>
+
+  <!-- LEFT PANEL: Character girl (upper) + Asia badge (lower) -->
+  <img src="assets/girl.png" class="left-girl" alt="character">
+  <img src="assets/asia.png" class="left-asia" alt="asia badge">
+
+  <!-- BOTTOM BAR -->
+  <div class="bottom-bar">
+    <p>
+      POWERED BY : <span class="hl">PLAYDEN</span>
+      <span class="sep"> - </span>
+      CO-POWERED BY : <span class="hl">NONSTOP GAMING</span>
+      <span class="sep"> - </span>
+      OPERATION PARTNER : <span class="hl">UGOD ESPORTS</span>
+    </p>
+  </div>
+
+  <!-- BUTTONS — inside poster but hidden on export -->
+  <div class="download-wrapper no-export">
+    <button class="upload-btn" onclick="window.location.href='index.html';">Upload More Files</button>
+    <button id="downloadBtn" class="download-btn">Download PNG</button>
+    <button id="resetBtn"    class="reset-btn">Reset Standings</button>
+  </div>
+
+</div><!-- /poster -->
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
