@@ -1,5 +1,6 @@
 const STORAGE_KEY = "ff_teams_data";
 const MAX_TEAMS = 13;
+
 /* ==============================
    UPLOAD PAGE (index.html)
 ============================== */
@@ -19,11 +20,12 @@ function proceed() {
     const teamCount = Object.keys(teamsData).length;
 
     // 🔥 ROUTING LOGIC
-    if (teamCount >= MAX_TEAMS) {
-      window.location.href = "bg.html";
-    } else {
-      window.location.href = "b.html";
-    }
+  if (teamCount <= MAX_TEAMS) {
+    window.location.href = "b.html";   // vertical
+  } 
+  else {
+    window.location.href = "bg.html";  // horizontal
+  }
   };
 
   reader.readAsText(fileInput.files[0]);
@@ -50,6 +52,7 @@ function processLogAndStore(text) {
     if (!nameMatch || !killMatch || !rankMatch || !totalMatch) return;
 
     const name = nameMatch[1].trim().toUpperCase();
+    
 
     if (!teamsData[name]) {
       teamsData[name] = {
@@ -147,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     left.innerHTML = "";
     right.innerHTML = "";
 
-    const safeTeams = teams;
+    const safeTeams = teams.slice(0, MAX_TEAMS);
 
 const leftCount = Math.ceil(safeTeams.length / 2);
 const leftTeams = safeTeams.slice(0, leftCount);
