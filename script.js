@@ -1,5 +1,5 @@
 const STORAGE_KEY = "ff_teams_data";
-
+const MAX_TEAMS = 13;
 /* ==============================
    UPLOAD PAGE (index.html)
 ============================== */
@@ -19,7 +19,7 @@ function proceed() {
     const teamCount = Object.keys(teamsData).length;
 
     // 🔥 ROUTING LOGIC
-    if (teamCount > 13) {
+    if (teamCount > MAX_TEAMS) {
       window.location.href = "bg.html";
     } else {
       window.location.href = "b.html";
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const table = document.getElementById("tableBody");
   if (table) {
     table.innerHTML = "";
-    teams.slice(0, 13).forEach((t, i) => {
+    teams.slice(0, MAX_TEAMS).forEach((t, i) => {
       table.innerHTML += `
         <div class="row">
           <div class="orange-cell">${i + 1}</div>
