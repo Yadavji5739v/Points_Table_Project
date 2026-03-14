@@ -19,7 +19,7 @@ function proceed() {
     const teamCount = Object.keys(teamsData).length;
 
     // 🔥 ROUTING LOGIC
-    if (teamCount > MAX_TEAMS) {
+    if (teamCount >= MAX_TEAMS) {
       window.location.href = "bg.html";
     } else {
       window.location.href = "b.html";
