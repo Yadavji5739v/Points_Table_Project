@@ -238,7 +238,7 @@ body {
     100px
     110px;
   column-gap: 10px; /* gap between rank and team */
-  height: 58px;
+  height: 55px;
   margin: 8px 0;
   /* rows should be solid yellow now */
   background: #f1c832d4;
