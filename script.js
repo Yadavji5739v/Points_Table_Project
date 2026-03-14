@@ -19,7 +19,7 @@ function proceed() {
     const teamCount = Object.keys(teamsData).length;
 
     // 🔥 ROUTING LOGIC
-    if (teamCount > 12) {
+    if (teamCount > 13) {
       window.location.href = "bg.html";
     } else {
       window.location.href = "b.html";
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const table = document.getElementById("tableBody");
   if (table) {
     table.innerHTML = "";
-    teams.slice(0, 12).forEach((t, i) => {
+    teams.slice(0, 13).forEach((t, i) => {
       table.innerHTML += `
         <div class="row">
           <div class="orange-cell">${i + 1}</div>
