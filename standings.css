@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -18,17 +20,15 @@ body {
 /* ================= POSTER ================= */
 
 .poster {
-  /* match updated background size 1080×1350 */
   width: 1080px;
   height: 1350px;
   padding: 30px;
-  padding-bottom: 120px;   /* EXACT footer space */
-
+  padding-bottom: 120px;
   position: relative;
   background: url("assets/background.png") center / cover no-repeat;
-  overflow: visible;
+  overflow: hidden;
+  /* keep side strips inside for html2canvas */
 }
-
 
 /* ================= HEADER ================= */
 
@@ -37,18 +37,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 150px 0 20px; /* add top spacing to move input lower */
-}
-
-.top-header {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
+  margin: 150px 0 20px;
 }
 
 /* Left logos container */
@@ -62,30 +51,30 @@ body {
 .small-logo {
   height: 100px;
   object-fit: contain;
-  margin-left: -18px;
+  margin-left: -10px;
   margin-top: -12px;
 }
+
 .small-logo1 {
   height: 100px;
   object-fit: contain;
-  margin-left: 10px;
+  margin-left: 2px;
   margin-top: -12px;
 }
+
 .center-logo {
-  height: 350px;
+  height: 450px;
   object-fit: contain;
-  padding-left: 120px; /* add space between center logo and left logos */
-  padding-bottom: -30px;
-  padding-bottom: 20px;
+  padding-left: 450px;
+  padding-bottom: 90px;
 }
 
 /* Right logo */
 .right-logo {
   height: 150px;
   object-fit: contain;
-  padding-left: 145px; /* push right logo further right */
-  margin-top: -60px; /* adjust vertical position of right logo */
- 
+  padding-left: 145px;
+  margin-top: -60px;
 }
 
 /* STANDINGS TITLE */
@@ -96,7 +85,6 @@ body {
   margin: 0 120px;
 }
 
-/* title hidden, keep styles in case needed */
 .standings-box {
   display: none;
 }
@@ -109,8 +97,8 @@ body {
   width: 800px;
   padding: 14px 20px;
   font-size: 64px;
-  background: transparent;   /* transparent background */
-  color: #ffffff;            /* keep text visible */
+  background: transparent;
+  color: #ffffff;
   border: none;
   font-weight: 750;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -120,8 +108,8 @@ body {
   margin-top: 110px;
   position: relative;
   z-index: 9999;
-
 }
+
 .user-input::placeholder {
   color: rgba(0, 0, 0, 0.5);
 }
@@ -139,257 +127,248 @@ body {
   height: 90px;
   object-fit: contain;
 }
-/* underline/input removed from new header design */
+
+/* ================= VERTICAL SIDE TEXT STRIPS ================= */
+
+.side-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.side-text span {
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-size: 20px;
+  font-weight: 200;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  text-shadow: 0 0 8px rgba(18, 200, 216, 0.4);
+}
+
+/* LEFT strip — text reads bottom-to-top (rotated CCW) */
+.side-text-left {
+  left: 4px;
+  /* inside poster — captured by html2canvas */
+  flex-direction: column-reverse;
+  /* so "NG ESPORTS" is at bottom */
+}
+
+.side-text-left span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  /* flip so text reads bottom→top */
+}
+
+/* RIGHT strip — text reads top-to-bottom (rotated CW) */
+.side-text-right {
+  right: 4px;
+  /* inside poster — captured by html2canvas */
+}
+
+.side-text-right span {
+  writing-mode: vertical-rl;
+  transform: rotate(0deg);
+  /* natural top→bottom reading */
+}
+
+/* ================= COLUMN GRID DEFINITION ================= */
+/*
+  Columns: [rank] [team name] [played] [win] [pos] [elim] [total]
+  Rank is a golden square block, rest are stats
+*/
+:root {
+  --col-rank: 72px;
+  --col-team: 420px;
+  --col-stat: 90px;
+  --col-gap: 6px;
+}
 
 /* ================= TABLE HEADER ================= */
 
 .table-head {
-  margin-top: 5px;
+  margin-top: 8px;
   display: grid;
   grid-template-columns:
-    80px
-    0.9fr
-    90px
-
-    100px
-    90px
-    100px
-    110px;
-  column-gap: 10px; /* keep gap for bridge effect */
-}
-
-.table-head > div {
-  padding: 10px 0;
-  border-radius: 20px;
-  font-size: 29px;
-  font-weight: 500;
-  text-transform: uppercase;
-  display: flex;
+    var(--col-rank) var(--col-team) var(--col-stat) var(--col-stat) var(--col-stat) var(--col-stat) var(--col-stat);
+  column-gap: var(--col-gap);
+  background: #12c8d8;
+  /* solid cyan bar */
+  border-radius: 6px;
+  padding: 0 10px;
+  height: 46px;
   align-items: center;
-  justify-content: center;
-  
 }
 
-/* header pills: rank, team, pos, total orange; others yellow */
-.table-head > div:nth-child(1),
-.table-head > div:nth-child(2),
-.table-head > div:nth-child(4),
-.table-head > div:nth-child(6) {
-  background: #f1c832d4;
-  color: #fff;
-}
-
-.table-head > div:nth-child(3),
-.table-head > div:nth-child(5),
-.table-head > div:nth-child(7){
-  background: #f67d03;
-  font-weight: 600;
-  color: #000;
-}
-
-/* Center header text */
-.table-head > div {
+/* All header cells */
+.table-head>div {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 0;
-  font-family: "Montserrat", "Arial", sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.8px;
-  padding: 0; 
-  line-height: 1.1
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: transparent;
 }
 
-.booyah {
-  height: 70px;
-  display: block;
-  margin: 0 auto;
+/* Team name aligns left */
+.table-head .th-team {
+  justify-content: flex-start;
+  padding-left: 15px;
 }
 
-/* ================= USER INPUT IN YELLOW STRIP ================= */
-
-/* removed unused search/input field styles */
-
-/* ================= USER INPUT SECTION ================= */
-
-.input-section {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: center;
+/* Rank header: no background difference, just centered */
+.table-head .th-rank {
+  font-size: 23px;
 }
 
 /* ================= TABLE BODY ================= */
 
-.table-body {
-  margin-top: 350px; /* push table even further down */
+#tableBody {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-/* ROW */
+/* ================= ROW ================= */
+
 .row {
   display: grid;
   grid-template-columns:
-    80px
-    0.9fr
-    85px
-    100px
-    90px
-    100px
-    110px;
-  column-gap: 10px; /* gap between rank and team */
-  height: 58px;
-  margin: 8px 0;
-  /* rows should be solid yellow now */
-  background: #f1c832d4;
-  
-  border-radius: 30px;
+    var(--col-rank) var(--col-team) var(--col-stat) var(--col-stat) var(--col-stat) var(--col-stat) var(--col-stat);
+  column-gap: var(--col-gap);
+  height: 65px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 4px;
+  background: transparent;
+  /* row itself is transparent */
+  position: relative;
 }
 
-/* First row gets extra margin */
-.row:first-child {
-  margin-top: 12px;
-}
-.row > div:nth-child(3),
-.row > div:nth-child(5),
-.row > div:nth-child(7){
-  font-size: 28px;
-}
-
-/* Center all row cells */
-.row > div {
+/* ---- RANK CELL — golden/amber square ---- */
+.cell-rank {
+  background: #c9a96e;
+  color: #000000;
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  background: transparent;
-}
-.orange-cell {
-  background: #f67d03;
-  font-weight: 500;
-  font-size: 28px;
+  height: 100%;
 }
 
-/* highlight specific columns with orange pills: rank, team, pos, total */
-.row > div:nth-child(1),
-.row > div:nth-child(2),
-.row > div:nth-child(4),
-.row > div:nth-child(6) {
-  background: linear-gradient(90deg, #ea5c04, #fcba04, #ea5c04);
-  color: #fff;
-  border-radius: 15px;
-  padding: 0 6px;
-}
-
-/* RANK (pill already handled above) */
-.rank {
-  color: #000000;
-  font-size: 30px;
-  
-}
-
-/* TEAM NAME (pill already handled above) */
-.team {
-  color: #fff;
+/* ---- TEAM NAME CELL — dark navy, left-aligned ---- */
+.cell-team {
+  background: #0e1e30;
+  color: #e8e8e8;
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+  border-radius: 4px;
+  height: 100%;
+}
+
+/* ---- STAT CELLS — played, win, pos, elim, total ---- */
+.cell-stat {
+  background: #0e1e30;
+  color: #d0d8e0;
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  font-size: 35px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  height: 100%;
+}
+
+/* Alternating shade — even rows slightly darker */
+.row:nth-child(even) .cell-team,
+.row:nth-child(even) .cell-stat {
+  background: #0a1828;
+}
+
+/* Thin cyan divider between rows */
+.row::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(18, 200, 216, 0.15);
+}
+
+/* Legacy aliases — kept so other pages (b.html, bg.html) are unaffected */
+.rank {
+  color: #000;
+  font-size: 24px;
+}
+
+.team {
+  color: #e0e0e0;
+  font-size: 26px;
+  font-weight: 700;
   font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   letter-spacing: 1px;
 }
 
+.orange-cell {
+  /* no-op for standings.html */
+}
 
-/* ================= ROW-WISE SAME COLOR (PURE BLACK TEXT) ================= */
-
-/* alternating background colors disabled; rows now use a uniform orange gradient */
-/* styles above for individual rows have been commented out */
-
-
-/* OTHER CELLS */
 .cell {
-  background: transparent;
-  color: #000;
+  color: #d0d8e0;
   font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 700;
 }
 
-/* ================= PARTNER STRIP ================= */
+/* ================= BOOYAH ICON ================= */
 
-.partner-strip {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin: 20px 0;
-}
-
-.partner-strip .partner-box img {
-  height: 80px;
-  object-fit: contain;
-}
-
-
-/* EACH PARTNER */ 
-/* .partner-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  color: #fff;
-  font-weight: 400;
-  text-transform: uppercase;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
-  height: 100%;
-}
-
-.partner-box span {
-  font-size: 32px;
-  line-height: 1.2;
-  text-align: center;
-}
-
-.partner-box img {
-  height: 76px;
-  object-fit: contain;
-}
-/* FOOTER ICON BASE */
-/* .partner-box img {
-  object-fit: contain;
+.booyah {
+  height: 34px;
   display: block;
-} */
-
-/* Managing Partner (UG – circular) */
-/*
-.partner-box.managing img {
-  width: auto;
-  height: 110px;
-  /* border-radius: 50%;
-
-
-/* Presented By (Monster – shield) */
-.partner-box.presented img {
-  width: 88px;
-  height: 95px;
+  margin: 0 auto;
 }
 
-/* Platform Partner (Groov – horizontal) */
-.partner-box.platform img {
-  width: auto;
-  height: 150px;
-  object-fit: contain;
-}
-
+/* ================= DOWNLOAD / CONTROL BUTTONS ================= */
 
 .download-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20px;
-  margin-top: 20px;
-  position: relative;
-  z-index: 10;
+  position: absolute;      /* pin to bottom of poster */
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 10px 0;
 }
 
-/* Upload More Button */
 .upload-btn {
   background: #ffffff;
   color: #A90F0F;
@@ -407,20 +386,20 @@ body {
   color: #ffffff;
 }
 
-
 .download-btn {
-  background: #C6A15A;
+  background: #12c8d8;
   color: #000;
   border: none;
   padding: 14px 28px;
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 600;
   cursor: pointer;
   border-radius: 6px;
+  transition: 0.3s;
 }
 
 .download-btn:hover {
-  background: #B98F3F;
+  background: #0aabb9;
 }
 
 .reset-btn {
@@ -440,7 +419,7 @@ body {
   color: #ffffff;
 }
 
-
+/* ================= MISC ================= */
 
 .booyah-input {
   width: 50px;
@@ -453,7 +432,22 @@ body {
   outline: none;
 }
 
+.input-section {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
 
-.table-head > div:nth-child(1) {
-  letter-spacing: -0.5px;
-} */
+.partner-strip {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.partner-strip .partner-box img {
+  height: 80px;
+  object-fit: contain;
+}

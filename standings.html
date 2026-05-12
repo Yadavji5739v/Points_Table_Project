@@ -9,6 +9,16 @@
 
 <div class="poster">
 
+  <!-- LEFT vertical text strip — single sentence rotated 90deg -->
+  <!-- <div class="side-text side-text-left">
+    <span>NG ESPORTS &nbsp;&bull;&nbsp; PRESENTS &nbsp;&bull;&nbsp; DOSTI &nbsp;&bull;&nbsp; RIVAL &nbsp;&bull;&nbsp; CUP</span>
+  </div> -->
+
+  <!-- RIGHT vertical text strip — single sentence rotated 90deg -->
+  <!-- <div class="side-text side-text-right">
+    <span>NG ESPORTS &nbsp;&bull;&nbsp; PRESENTS &nbsp;&bull;&nbsp; DOSTI &nbsp;&bull;&nbsp; RIVAL &nbsp;&bull;&nbsp; CUP</span>
+  </div> -->
+
  <!-- two logos positioned at top‑left like screenshot -->
 <div class="top-logos">
   
@@ -24,9 +34,9 @@
   </div>
 
   <!-- Right Side (1 logo) -->
-  <div class="logo-right">
+  <!-- <div class="logo-right">
     <img src="assets/managing-partner.png" class="right-logo" alt="logo3">
-  </div>
+  </div> -->
 
 </div>
 
@@ -41,26 +51,27 @@
 
   <!-- TABLE HEADER -->
   <div class="table-head">
-    <div>RANK</div>
-    <div>TEAM NAME</div>
-    <div>GAMES</div>
-    <div><img src="assets/booyah.png" class="booyah"></div>
-    <!-- games column removed -->
-    <div>POS</div>
-    <div>ELIMS</div>
-    <div>TOTAL</div>
+    <div class="th-rank">#</div>
+    <div class="th-team">TEAM NAME</div>
+    <div class="th-stat">PLAYED</div>
+    <div class="th-stat">WIN</div>
+    <div class="th-stat">POS.</div>
+    <div class="th-stat">ELIM.</div>
+    <div class="th-stat">TOTAL</div>
   </div>
 
   <!-- TABLE -->
   <div id="tableBody"></div>
+
+  <!-- Buttons fixed at bottom of poster -->
   <div class="download-wrapper no-export">
     <button id="uploadMoreBtn" class="upload-btn" onclick="window.location.href='index.html';">
-    Upload More Files
-  </button>
+      Upload More Files
+    </button>
     <button id="downloadBtn" class="download-btn">Download PNG</button>
     <button id="resetBtn" class="reset-btn">
-    Reset Standings
-  </button>
+      Reset Standings
+    </button>
   </div>
 
 </div>
