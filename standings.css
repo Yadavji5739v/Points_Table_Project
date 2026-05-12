@@ -187,7 +187,7 @@ body {
 */
 :root {
   --col-rank: 72px;
-  --col-team: 420px;
+  --col-team: 1fr;
   --col-stat: 90px;
   --col-gap: 6px;
 }
@@ -204,7 +204,7 @@ body {
   /* solid cyan bar */
   border-radius: 6px;
   padding: 0 10px;
-  height: 46px;
+  height: 50px;
   align-items: center;
 }
 
@@ -215,7 +215,7 @@ body {
   justify-content: center;
   text-align: center;
   font-family: 'Montserrat', 'Arial', sans-serif;
-  font-size: 25px;
+  font-size: 26px;
   font-weight: 700;
   color: #000000;
   text-transform: uppercase;
@@ -450,4 +450,4 @@ body {
 .partner-strip .partner-box img {
   height: 80px;
   object-fit: contain;
-}
+} 
