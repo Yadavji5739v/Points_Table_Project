@@ -17,8 +17,8 @@ body {
 
 /* ── POSTER / CANVAS ── */
 .poster {
-  width: 2752px;
-  height: 1536px;
+  width: 1920px;
+  height: 1080px;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
