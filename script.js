@@ -4,6 +4,50 @@ const MAX_TEAMS = 13;
 /* ==============================
    UPLOAD PAGE (index.html)
 ============================== */
+
+/* ==============================
+   SIMPLE WEBSITE PASSWORD PROTECTION
+============================== */
+
+const WEBSITE_PASSWORD = "secret123";
+
+(function () {
+
+  // Prevent repeated asking during same session
+  const accessGranted = sessionStorage.getItem("ff_access");
+
+  if (accessGranted === "true") return;
+
+  const enteredPassword = prompt("Enter Website Password");
+
+  if (enteredPassword === WEBSITE_PASSWORD) {
+
+    sessionStorage.setItem("ff_access", "true");
+
+  } else {
+
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:black;
+        color:white;
+        font-family:Arial;
+        flex-direction:column;
+      ">
+        <h1>ACCESS DENIED</h1>
+        <p>Incorrect Password</p>
+      </div>
+    `;
+
+    throw new Error("Access Denied");
+  }
+
+})();
+
+
 function proceed() {
   const fileInput = document.getElementById("logFile");
 
