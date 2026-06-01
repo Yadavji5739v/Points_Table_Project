@@ -1,5 +1,5 @@
 const STORAGE_KEY = "ff_teams_data";
-const MAX_TEAMS = 13;
+const MAX_TEAMS = 12;
 
 /* ==============================
    UPLOAD PAGE (index.html)
@@ -9,43 +9,43 @@ const MAX_TEAMS = 13;
    SIMPLE WEBSITE PASSWORD PROTECTION
 ============================== */
 
-const WEBSITE_PASSWORD = "secret123";
+// const WEBSITE_PASSWORD = "secret123";
 
-(function () {
+// (function () {
 
-  // Prevent repeated asking during same session
-  const accessGranted = sessionStorage.getItem("ff_access");
+//   // Prevent repeated asking during same session
+//   const accessGranted = sessionStorage.getItem("ff_access");
 
-  if (accessGranted === "true") return;
+//   if (accessGranted === "true") return;
 
-  const enteredPassword = prompt("Enter Website Password");
+//   const enteredPassword = prompt("Enter Website Password");
 
-  if (enteredPassword === WEBSITE_PASSWORD) {
+//   if (enteredPassword === WEBSITE_PASSWORD) {
 
-    sessionStorage.setItem("ff_access", "true");
+//     sessionStorage.setItem("ff_access", "true");
 
-  } else {
+//   } else {
 
-    document.body.innerHTML = `
-      <div style="
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background:black;
-        color:white;
-        font-family:Arial;
-        flex-direction:column;
-      ">
-        <h1>ACCESS DENIED</h1>
-        <p>Incorrect Password</p>
-      </div>
-    `;
+//     document.body.innerHTML = `
+//       <div style="
+//         height:100vh;
+//         display:flex;
+//         justify-content:center;
+//         align-items:center;
+//         background:black;
+//         color:white;
+//         font-family:Arial;
+//         flex-direction:column;
+//       ">
+//         <h1>ACCESS DENIED</h1>
+//         <p>Incorrect Password</p>
+//       </div>
+//     `;
 
-    throw new Error("Access Denied");
-  }
+//     throw new Error("Access Denied");
+//   }
 
-})();
+// })();
 
 
 function proceed() {
