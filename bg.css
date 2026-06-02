@@ -47,16 +47,33 @@ body {
   align-items: center;
 }
 
-.asia-logo {
-  width: 220px;
-  margin-left: 150px;
+.platform-logo {
+  width: 150px;
+  margin-left: 50px;
+  margin-top: -20px;
 }
-.partner-box:first-child {
+
+
+.ng-logo {
+  width: 150px;
+  margin-left: 50px; 
+  margin-right: -270px;
+  margin-top: -20px;
+}
+
+.asia-logo {
+  width: 400px;
+  margin-left: 800px;
+  margin-top: -90px;
+}
+
+
+/* .partner-box:first-child {
   margin-left: 150px;
 }
 .partner-box:last-child {
   transform: translateX(-165px);
-}
+} */
 .standings-wrapper {
   display: flex;
   flex-direction: column;
@@ -70,22 +87,25 @@ body {
 
 
 .standings-box {
-  background: #C6A15A;
+  background: #0489b2;
   color: #fff;
-  font-size: 80px;
+  font-size: 100px;
   font-weight: : 500;\
   letter-spacing: 3px;
   line-height:1.1;
   padding: 18px 70px;
   
   text-transform: uppercase;
+  MARGIN-TOP: 20px;
 }
 
 .standings-underline {
   margin-top: 18px;
   width: 380px;
-  height: 50px;
-  background: #B98F3F;
+  height: 70px;
+  background: #0489b2;
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 .user-input {
@@ -93,7 +113,7 @@ body {
   height: 100%;
   background: transparent;
   border: none;
-  font-size: 37px;
+  font-size: 45px;
   text-transform: uppercase;
   text-align: center;
 }
@@ -101,7 +121,7 @@ body {
 /* TABLES */
 .tables-wrapper {
   position: relative;
-  top: -30px;   /* 🔥 moves table UP */
+  /* top: -10px;   🔥 moves table UP */
 }
 
 
@@ -113,15 +133,15 @@ body {
 /* TABLE HEADER */
 .table-head {
   display: grid;
-  grid-template-columns: 95px 350px 90px 100px 100px 100px 135px;
-  background: #B98F3F;
+  grid-template-columns: 100px 350px 95px 100px 100px 100px 135px;
+  background: #0489b2;
   font-size: 30px;
-  height: 67px
+  height: 70px;
   text-align: center;
   font-weight: 200;
   padding: 10px 0;
+  margin-top: 35px;
   font-family: "Times New Roman", serif;
-
 }
 
 /* TABLE HEADER TEXT STYLE */
@@ -142,20 +162,20 @@ img.booyah {
 /* ROWS */
 .row {
   display: grid;
-  grid-template-columns: 80px 1fr 80px 100px 100px 100px 120px;
-  height: 50px;
-  margin-top: 6px;
+  grid-template-columns: 100px 350 95px 100px 100px 100px 135px;
+  height: 65px;
+  margin-top: 8px;
   border-bottom: 4px solid #fff;
 }
 
 .rank,
 .cell {
-  background: #c16903;
+  background: #0489b2;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 36px;
 }
 
 .team {
@@ -168,77 +188,22 @@ img.booyah {
   font-weight: 100;
   letter-spacing: 1px;
 }
-/* Row 1 – Pure White */
-.row:nth-child(1) > div:nth-child(2),
-.row:nth-child(1) > div:nth-child(4),
-.row:nth-child(1) > div:nth-child(6) {
+/* First 12 rows: white for the selected columns (team / pos / elims/total alignment depends on layout) */
+.row:nth-child(-n+12) > div:nth-child(2),
+.row:nth-child(-n+12) > div:nth-child(4),
+.row:nth-child(-n+12) > div:nth-child(6) {
   background: #ffffff;
   color: #000;
 }
 
-/* Row 2 */
-.row:nth-child(2) > div:nth-child(2),
-.row:nth-child(2) > div:nth-child(4),
-.row:nth-child(2) > div:nth-child(6) {
-  background: #f2f2f2;
+/* Rows after 12: slight shaded black for contrast */
+.row:nth-child(n+13) > div:nth-child(2),
+.row:nth-child(n+13) > div:nth-child(4),
+.row:nth-child(n+13) > div:nth-child(6) {
+  background: #ffffff58;
   color: #000;
 }
 
-/* Row 3 */
-.row:nth-child(3) > div:nth-child(2),
-.row:nth-child(3) > div:nth-child(4),
-.row:nth-child(3) > div:nth-child(6) {
-  background: #e5e5e5;
-  color: #000;
-}
-
-/* Row 4 */
-.row:nth-child(4) > div:nth-child(2),
-.row:nth-child(4) > div:nth-child(4),
-.row:nth-child(4) > div:nth-child(6) {
-  background: #d6d6d6;
-  color: #000;
-}
-
-/* Row 5 */
-.row:nth-child(5) > div:nth-child(2),
-.row:nth-child(5) > div:nth-child(4),
-.row:nth-child(5) > div:nth-child(6) {
-  background: #c6c6c6;
-  color: #000;
-}
-
-/* Row 6 */
-.row:nth-child(6) > div:nth-child(2),
-.row:nth-child(6) > div:nth-child(4),
-.row:nth-child(6) > div:nth-child(6) {
-  background: #b6b6b6;
-  color: #000;
-}
-
-/* Row 7 */
-.row:nth-child(7) > div:nth-child(2),
-.row:nth-child(7) > div:nth-child(4),
-.row:nth-child(7) > div:nth-child(6) {
-  background: #a5a5a5;
-  color: #000;
-}
-
-/* Row 8 */
-.row:nth-child(8) > div:nth-child(2),
-.row:nth-child(8) > div:nth-child(4),
-.row:nth-child(8) > div:nth-child(6) {
-  background: #949494;
-  color: #000;
-}
-
-/* Row 9 – Light Dark Grey (NOT black) */
-.row:nth-child(9) > div:nth-child(2),
-.row:nth-child(9) > div:nth-child(4),
-.row:nth-child(9) > div:nth-child(6) {
-  background: #838383;
-  color: #000;
-}
 
 
 

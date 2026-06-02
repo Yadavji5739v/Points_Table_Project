@@ -64,11 +64,11 @@ function proceed() {
     const teamCount = Object.keys(teamsData).length;
 
     // 🔥 ROUTING LOGIC
-  if (teamCount <= MAX_TEAMS) {
-    window.location.href = "b.html";   // vertical
+  if (teamCount > MAX_TEAMS) {
+    window.location.href = "bg.html";  
   } 
   else {
-    window.location.href = "bg.html";  // horizontal
+    window.location.href = "b.html"; 
   }
   };
 
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     left.innerHTML = "";
     right.innerHTML = "";
 
-    const safeTeams = teams.slice(0, MAX_TEAMS);
+    const safeTeams = teams.slice(0, 18);
 
 const leftCount = Math.ceil(safeTeams.length / 2);
 const leftTeams = safeTeams.slice(0, leftCount);
@@ -206,7 +206,7 @@ const rightTeams = safeTeams.slice(leftCount);
             <div class="rank">${offset + i + 1}</div>
             <div class="team">${t.name}</div>
             <div class="cell">${t.booyah || 0}</div>
-            <!-- games removed -->
+            <div class="cell">${t.games}</div>
             <div class="cell">${t.pos}</div>
             <div class="cell">${t.kills}</div>
             <div class="cell">${t.total}</div>
