@@ -282,34 +282,70 @@ async function runEnergySweep() {
 /* ---- Tournament Intro ---- */
 async function runTournamentIntro() {
   const wrap = document.getElementById("tournamentIntro");
+  const leftPanel = document.querySelector(".ti-left-panel");
+  const rightPanel = document.querySelector(".ti-right-panel");
+  const centerContent = document.querySelector(".ti-center");
   const badge = document.getElementById("tiBadge");
-  const div = document.getElementById("tiDivider");
   const title = document.getElementById("tiTitle");
   const sub = document.getElementById("tiSub");
-  const logo = document.getElementById("tiLogo");
+  const topLogo = document.querySelector(".ti-top-logo-wrap");
+  const bottomLogo = document.querySelector(".ti-bottom-logo-wrap");
+  const socialIcons = document.querySelector(".ti-social-icons");
 
   wrap.style.opacity = 1;
   wrap.style.pointerEvents = "none";
 
-  badge.style.transition = "opacity 0.5s, transform 0.5s";
-  badge.style.opacity = 1; badge.style.transform = "translateY(0)";
-  await wait(400);
+  // Animate side panels
+  leftPanel.style.transition = "opacity 0.8s, transform 0.8s";
+  leftPanel.style.opacity = 1;
+  leftPanel.style.transform = "translateX(0)";
+  
+  rightPanel.style.transition = "opacity 0.8s, transform 0.8s";
+  rightPanel.style.opacity = 1;
+  rightPanel.style.transform = "translateX(0)";
+  await wait(800);
 
-  div.style.transition = "width 0.6s ease";
-  div.style.width = "400px";
-  await wait(500);
+  // Animate center content
+  centerContent.style.transition = "opacity 0.8s, transform 0.8s";
+  centerContent.style.opacity = 1;
+  centerContent.style.transform = "scale(1)";
+  await wait(600);
 
-  title.style.transition = "opacity 0.6s, transform 0.6s";
-  title.style.opacity = 1; title.style.transform = "scale(1)";
-  await wait(500);
+  // Animate top logo
+  topLogo.style.transition = "opacity 0.8s, transform 0.8s";
+  topLogo.style.opacity = 1;
+  topLogo.style.transform = "scale(1)";
+  await wait(700);
 
-  sub.style.transition = "opacity 0.5s, transform 0.5s";
-  sub.style.opacity = 1; sub.style.transform = "translateY(0)";
-  await wait(400);
+  // Animate badge
+  badge.style.transition = "opacity 0.8s, transform 0.8s";
+  badge.style.opacity = 1;
+  badge.style.transform = "translateY(0)";
+  await wait(700);
 
-  logo.style.transition = "opacity 0.5s, transform 0.5s";
-  logo.style.opacity = 1; logo.style.transform = "scale(1)";
-  await wait(2000);
+  // Animate title
+  title.style.transition = "opacity 1s, transform 1s";
+  title.style.opacity = 1;
+  title.style.transform = "scale(1)";
+  await wait(900);
+
+  // Animate subtitle
+  sub.style.transition = "opacity 0.8s, transform 0.8s";
+  sub.style.opacity = 1;
+  sub.style.transform = "translateY(0)";
+  await wait(700);
+
+  // Animate bottom logo
+  bottomLogo.style.transition = "opacity 0.8s, transform 0.8s";
+  bottomLogo.style.opacity = 1;
+  bottomLogo.style.transform = "scale(1)";
+  await wait(700);
+
+  // Animate social icons
+  socialIcons.style.transition = "opacity 0.8s, transform 0.8s";
+  socialIcons.style.opacity = 1;
+  socialIcons.style.transform = "translateY(0)";
+  await wait(4900);
 
   await fadeOut(wrap, 500);
 }
@@ -386,16 +422,16 @@ function runMVPReveal(players) {
     wrap.style.opacity = 1;
     wrap.style.pointerEvents = "all";
 
-    title.style.transition = "opacity 0.6s, transform 0.6s";
+    title.style.transition = "opacity 0.8s, transform 0.8s";
     title.style.opacity = 1; title.style.transform = "translateY(0)";
-    await wait(600);
+    await wait(1000);
 
     const cards = document.querySelectorAll(".mvp-card-wrap");
     for (let i = 0; i < cards.length; i++) {
       const c = cards[i];
-      c.style.transition = "opacity 0.5s, transform 0.5s";
+      c.style.transition = "opacity 0.8s, transform 0.8s";
       c.style.opacity = 1; c.style.transform = "translateY(0) scale(1)";
-      await wait(200);
+      await wait(600);
     }
 
     if (btn) {
@@ -403,7 +439,7 @@ function runMVPReveal(players) {
     }
 
     wrap.onclick = finish;
-    setTimeout(finish, 3000);
+    setTimeout(finish, 10000);
   });
 }
 
@@ -577,7 +613,7 @@ function runCelebration(teamName, mvpPlayer) {
 
     if (btn) btn.onclick = finish;
     wrap.onclick = finish;
-    setTimeout(finish, 10000);
+    setTimeout(finish, 5000);
   });
 }
 
@@ -618,6 +654,9 @@ async function runPointsTable() {
   if (header) header.style.opacity = 1;
   await wait(300);
   if (footer) footer.style.opacity = 1;
+  
+  // Display points table for 60 seconds then stay on screen
+  await wait(60000);
 }
 
 /* ============================================================
