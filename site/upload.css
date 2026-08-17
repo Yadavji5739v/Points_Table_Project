@@ -6,7 +6,7 @@
 }
 
 body {
-  background: radial-gradient(circle at top, #b30000, #000 70%);
+  background: radial-gradient(circle at top, #00FF00, #000 70%);
   height: 100vh;
 }
 
@@ -21,16 +21,16 @@ body {
 /* CARD */
 .upload-card {
   background: rgba(0, 0, 0, 0.85);
-  border: 3px solid #ffcc33;
+  border: 3px solid #00FF00;
   padding: 55px 65px;
   width: 480px;              /* 🔥 slightly wider */
   text-align: center;
-  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  box-shadow: 0 0 40px rgba(0,255,0,0.3);
 }
 
 /* MAIN TITLE */
 .upload-card h1 {
-  color: #ffcc33;
+  color: #00FF00;
   font-size: 56px;           /* 🔥 BIG TITLE */
   letter-spacing: 3px;
   margin-bottom: 12px;
@@ -53,12 +53,11 @@ input[type="file"] {
   padding: 20px;             /* 🔥 bigger click area */
   background: #222;
   color: #fff;
-  border: 2px dashed #ffcc33;
+  border: 2px dashed #00FF00;
   cursor: pointer;
   margin-bottom: 30px;
   font-size: 20px;           /* 🔥 bigger text */
   letter-spacing: 1px;
- says;
 }
 
 .file-label:hover {
@@ -69,16 +68,17 @@ input[type="file"] {
 button {
   width: 100%;
   padding: 18px;             /* 🔥 bigger button */
-  background: #ffcc33;
+  background: #00FF00;
   border: none;
   font-size: 26px;           /* 🔥 BIG CTA */
   font-weight: 500;
   cursor: pointer;
   letter-spacing: 2px;
+  color: #000;
 }
 
 button:hover {
-  background: #ffdb66;
+  background: #00DD00;
 }
 
 /* NOTE */

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Fire MVP</title>
+  <link rel="stylesheet" href="upload.css">
+</head>
+<body>
+
+<div class="upload-wrapper">
+  <div class="upload-card">
+
+    <h1>FREE FIRE</h1>
+    <h2>MVP CALCULATOR</h2>
+
+    <p class="subtitle">
+      Upload match log files to calculate overall MVP
+    </p>
+
+    <label class="file-box">
+      <input type="file" id="logFile" accept=".txt,.log">
+      <span>Select Match Log File</span>
+    </label>
+
+    <p id="statusText" class="status"></p>
+
+    <button class="primary-btn" onclick="goToMVP()">
+      VIEW MVP
+    </button>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

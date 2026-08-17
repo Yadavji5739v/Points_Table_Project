@@ -1,5 +1,68 @@
 const STORAGE_KEY = "ff_teams_data";
+const OVERLAY_TITLE_KEY = "ff_overlay_title";
 const MAX_TEAMS = 12;
+
+function loadOverlayTitleData() {
+  try {
+    return JSON.parse(localStorage.getItem(OVERLAY_TITLE_KEY) || "{}") || {};
+  } catch (err) {
+    return {};
+  }
+}
+
+function saveOverlayTitleData(titleData) {
+  if (!titleData || (!titleData.main && !titleData.sub)) return;
+  localStorage.setItem(OVERLAY_TITLE_KEY, JSON.stringify({
+    main: titleData.main || "",
+    sub: titleData.sub || ""
+  }));
+}
+
+function applyStoredTitleToInputs() {
+  const stored = loadOverlayTitleData();
+  const ui = document.getElementById("userInput");
+  const ve = document.querySelector(".title-esports");
+  const vp = document.querySelector(".title-phase");
+
+  if (ui && stored.main) {
+    ui.value = stored.main;
+  }
+  if (ve && stored.main) {
+    ve.value = stored.main;
+  }
+  if (vp && stored.sub) {
+    vp.value = stored.sub;
+  }
+}
+
+function attachOverlayTitleListeners() {
+  const ui = document.getElementById("userInput");
+  const ve = document.querySelector(".title-esports");
+  const vp = document.querySelector(".title-phase");
+
+  if (ui) {
+    ui.addEventListener("input", () => {
+      saveOverlayTitleData({ main: ui.value.trim(), sub: loadOverlayTitleData().sub || "" });
+    });
+  }
+
+  if (ve || vp) {
+    const update = () => {
+      saveOverlayTitleData({
+        main: ve ? ve.value.trim() : "",
+        sub: vp ? vp.value.trim() : ""
+      });
+    };
+    if (ve) ve.addEventListener("input", update);
+    if (vp) vp.addEventListener("input", update);
+  }
+
+  window.addEventListener("storage", (event) => {
+    if (event.key === OVERLAY_TITLE_KEY) {
+      applyStoredTitleToInputs();
+    }
+  });
+}
 
 /* ==============================
    UPLOAD PAGE (index.html)
@@ -56,24 +119,83 @@ function proceed() {
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    processLogAndStore(e.target.result);
+  const files = Array.from(fileInput.files);
+  let filesProcessed = 0;
 
-    const teamsData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    const teamCount = Object.keys(teamsData).length;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      processLogAndStore(e.target.result);
+      filesProcessed++;
 
-    // 🔥 ROUTING LOGIC
-  if (teamCount > MAX_TEAMS) {
-    window.location.href = "bg.html";  
-  } 
-  else {
-    window.location.href = "b.html"; 
-  }
-  };
+      // After all files are processed, refresh overlay and navigate
+      if (filesProcessed === files.length) {
+        // Auto-refresh live session so show.html / live.html get latest data
+        if (window.ffRefreshLiveSessionFromCurrentStandings) {
+          window.ffRefreshLiveSessionFromCurrentStandings();
+        }
 
-  reader.readAsText(fileInput.files[0]);
+        const teamsData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        const teamCount = Object.keys(teamsData).length;
+
+        if (teamCount > MAX_TEAMS) {
+          window.location.href = "bg.html";
+        } else {
+          window.location.href = "b.html";
+        }
+      }
+    };
+    reader.readAsText(file);
+  });
 }
+
+function processMVP(text) {
+  const MVP_KEY = "ff_mvp_players";
+  if (!text || typeof text !== "string") return {};
+
+  const lines = text.split("\n");
+  let players = {};
+  try {
+    players = JSON.parse(localStorage.getItem(MVP_KEY) || "{}") || {};
+  } catch (e) {
+    players = {};
+  }
+
+  let currentTeamRank = 999;
+  let currentTeamName = "UNKNOWN TEAM";
+
+  lines.forEach(rawLine => {
+    const line = rawLine.trim();
+
+    if (line.startsWith("TeamName:")) {
+      const teamMatch = line.match(/TeamName:\s(.+?)\s+Rank:/i) || line.match(/TeamName:\s(.+?)\s/i);
+      const rankMatch = line.match(/Rank:\s+(\d+)/i) || line.match(/RankScore:\s*(\d+)/i);
+      if (teamMatch) currentTeamName = teamMatch[1].trim();
+      if (rankMatch) currentTeamRank = parseInt(rankMatch[1], 10);
+      return;
+    }
+
+    if (line.startsWith("NAME:")) {
+      const nameMatch = line.match(/NAME:\s(.+?)\s+ID:/i) || line.match(/NAME:\s(.+?)$/i);
+      const killMatch = line.match(/KILL:\s+(\d+)/i) || line.match(/KILLS:\s*(\d+)/i);
+      if (!nameMatch || !killMatch) return;
+
+      const playerName = nameMatch[1].trim();
+      const kills = parseInt(killMatch[1], 10);
+
+      if (!players[playerName]) {
+        players[playerName] = { name: playerName, team: currentTeamName, kills: 0, bestTeamRank: currentTeamRank };
+      }
+      players[playerName].kills += kills;
+      players[playerName].team = currentTeamName;
+      players[playerName].bestTeamRank = Math.min(players[playerName].bestTeamRank || 999, currentTeamRank);
+    }
+  });
+
+  localStorage.setItem(MVP_KEY, JSON.stringify(players));
+  return players;
+}
+window.processMVP = processMVP;
 
 /* ==============================
    PROCESS LOG + MERGE DATA
@@ -84,6 +206,13 @@ function processLogAndStore(text) {
   let teamsData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
   let booyahGiven = false;
+
+  // also build MVP ranking data from the same uploaded log
+  try {
+    processMVP(text);
+  } catch (err) {
+    console.warn("MVP parse failed", err);
+  }
 
   lines.forEach(line => {
     if (!line.startsWith("TeamName:")) return;
@@ -125,6 +254,10 @@ function processLogAndStore(text) {
   });
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(teamsData));
+
+  if (window.ffRefreshLiveSessionFromCurrentStandings) {
+    window.ffRefreshLiveSessionFromCurrentStandings();
+  }
 }
 
 
@@ -184,6 +317,39 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =====================
+     VER VIEW (ver.html)
+  ===================== */
+  const verLeft = document.getElementById("verLeftTable");
+  const verRight = document.getElementById("verRightTable");
+
+  if (verLeft && verRight) {
+    verLeft.innerHTML = "";
+    verRight.innerHTML = "";
+
+    const verTeams = teams.slice(0, MAX_TEAMS);
+    const verLeftTeams = verTeams.slice(0, 6);
+    const verRightTeams = verTeams.slice(6, 12);
+
+    const renderVerRow = (t, rank, container) => {
+      const rowClass = rank === 1 ? "ver-row rank-first" : "ver-row";
+      container.innerHTML += `
+        <div class="${rowClass}">
+          <div class="ver-rank"><span>${rank}</span></div>
+          <div class="ver-bar">
+            <div class="ver-team">${t.name}</div>
+            <div class="ver-stat">${t.pos}</div>
+            <div class="ver-stat">${t.kills}</div>
+            <div class="ver-stat">${t.total}</div>
+          </div>
+        </div>
+      `;
+    };
+
+    verLeftTeams.forEach((t, i) => renderVerRow(t, i + 1, verLeft));
+    verRightTeams.forEach((t, i) => renderVerRow(t, i + 7, verRight));
+  }
+
+  /* =====================
      HORIZONTAL (bg.html)
   ===================== */
   const left = document.getElementById("leftTable");
@@ -239,6 +405,9 @@ const rightTeams = safeTeams.slice(leftCount);
   if (resetBtn) {
     resetBtn.onclick = resetStandings;
   }
+
+  applyStoredTitleToInputs();
+  attachOverlayTitleListeners();
 });
 
 /* ==============================
@@ -300,10 +469,21 @@ function downloadImage() {
 /* ==============================
    RESET STANDINGS
 ============================== */
+function clearBroadcastState() {
+  [
+    STORAGE_KEY,
+    "ff_mvp_players",
+    "ff_overlays_v1",
+    "ff_live_session_v1",
+    "ff_live_session_signal",
+    "ff_overlay_title"
+  ].forEach(key => localStorage.removeItem(key));
+}
+
 function resetStandings() {
   const confirmReset = confirm("Are you sure you want to reset all standings?");
   if (!confirmReset) return;
 
-  localStorage.removeItem(STORAGE_KEY);
+  clearBroadcastState();
   window.location.href = "index.html";
 }

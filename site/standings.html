@@ -4,10 +4,27 @@
   <meta charset="UTF-8">
   <title>FF Standings</title>
   <link rel="stylesheet" href="standings.css">
+  <link rel="stylesheet" href="premium-ui.css">
+  <link rel="stylesheet" href="animated-bg.css">
 </head>
 <body>
 
 <div class="poster">
+  <div class="background">
+    <div class="aurora"></div>
+    <div class="fog"></div>
+    <div class="streak"></div>
+    <div class="streak two"></div>
+    <div class="particles-bg"></div>
+    <div class="hex-bg"></div>
+    <div class="energy-frame"></div>
+    <div class="left-energy"></div>
+    <div class="right-energy"></div>
+    <div class="corner-light tl"></div>
+    <div class="corner-light tr"></div>
+    <div class="corner-light bl"></div>
+    <div class="corner-light br"></div>
+  </div>
 
   <!-- LEFT vertical text strip — single sentence rotated 90deg -->
   <!-- <div class="side-text side-text-left">
@@ -24,7 +41,7 @@
   
   <!-- Left Side (2 logos) -->
   <div class="logo-left">
-    <img src="assets/platform-partner.png" class="small-logo" alt="logo1">
+    <img src="assets/arena.png" class="small-logo" alt="logo1">
     <img src="assets/presentedby.png" class="small-logo1" alt="logo2">
   </div>
 
@@ -68,15 +85,40 @@
     <button id="uploadMoreBtn" class="upload-btn" onclick="window.location.href='index.html';">
       Upload More Files
     </button>
-    <button id="downloadBtn" class="download-btn">Download PNG</button>
+    <button id="downloadBtn" class="download-btn">Download</button>
     <button id="resetBtn" class="reset-btn">
-      Reset Standings
+      Reset
     </button>
+  </div>
+
+  <!-- Footer Strip with Logos -->
+  <div class="footer-strip">
+    <div class="strip-section">
+      <div class="strip-text">
+        <span class="strip-label">POWERED BY</span><br> 
+        <span class="strip-label1">16 ARENA</span>
+      </div>
+      <img src="assets/arena.png" alt="" class="strip-logo1">
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-section">
+      <div class="strip-text">
+        <span class="strip-label">CO-POWERED BY</span><br>
+        <span class="strip-label1">NONSTOP GAMING</span>
+      </div>
+      <img src="assets/nonstop.png" alt="" class="strip-logo">
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-section">
+      <img src="assets/freefire_max.png" alt="Free Fire Max" class="strip-logo-large">
+    </div>
   </div>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="script.js"></script>
+<script src="overlay-data.js"></script>
+<script src="overlay-buttons.js"></script>
 </body>
 </html>

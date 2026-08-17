@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.upload-card {
+  background: linear-gradient(180deg, #111, #0a0a0a);
+  padding: 40px 35px;
+  width: 360px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 204, 51, 0.15);
+}
+
+.upload-card h1 {
+  font-size: 34px;
+  color: #ffcc33;
+  margin-bottom: 5px;
+}
+
+.upload-card h2 {
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #bbb;
+  margin-bottom: 25px;
+}
+
+.file-box {
+  display: block;
+  background: #1e1e1e;
+  border: 2px dashed #ffcc33;
+  padding: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.file-box:hover {
+  background: #2a2a2a;
+}
+
+.file-box span {
+  font-size: 15px;
+  color: #ffcc33;
+}
+
+.file-box input {
+  display: none;
+}
+
+.status {
+  font-size: 13px;
+  margin: 10px 0;
+  color: #6fff6f;
+  min-height: 18px;
+}
+
+.primary-btn {
+  background: linear-gradient(90deg, #ffcc33, #ffb700);
+  border: none;
+  color: #000;
+  padding: 14px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 204, 51, 0.4);
+}

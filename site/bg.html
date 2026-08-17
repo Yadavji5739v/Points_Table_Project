@@ -4,10 +4,27 @@
   <meta charset="UTF-8">
   <title>FF Standings – Horizontal</title>
   <link rel="stylesheet" href="bg.css">
+  <link rel="stylesheet" href="premium-ui.css">
+  <link rel="stylesheet" href="animated-bg.css">
 </head>
 <body>
 
 <div class="poster horizontal">
+  <div class="background">
+    <div class="aurora"></div>
+    <div class="fog"></div>
+    <div class="streak"></div>
+    <div class="streak two"></div>
+    <div class="particles-bg"></div>
+    <div class="hex-bg"></div>
+    <div class="energy-frame"></div>
+    <div class="left-energy"></div>
+    <div class="right-energy"></div>
+    <div class="corner-light tl"></div>
+    <div class="corner-light tr"></div>
+    <div class="corner-light bl"></div>
+    <div class="corner-light br"></div>
+  </div>
 
   <!-- HEADER -->
   <div class="header">
@@ -79,6 +96,7 @@ x
   <!-- BUTTONS -->
   <div class="download-wrapper no-export">
     <button id="uploadMoreBtn" class="upload-btn" onclick="window.location.href='index.html';">Upload More Files</button>
+    <button class="upload-btn" onclick="window.location.href='mvp.html';">Open MVP</button>
     <button id="downloadBtn" class="download-btn">Download PNG</button>
     <button id="resetBtn" class="reset-btn">Reset Standings</button>
   </div>
@@ -87,5 +105,7 @@ x
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="script.js"></script>
+<script src="overlay-data.js"></script>
+<script src="overlay-buttons.js"></script>
 </body>
 </html>

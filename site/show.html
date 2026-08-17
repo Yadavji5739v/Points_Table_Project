@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FF Broadcast Show</title>
+  <link rel="stylesheet" href="show.css">
+</head>
+<body>
+
+<!-- Fade overlay for black screen -->
+<div id="fadeOverlay"></div>
+
+<!-- Animated Cyber Background -->
+<div id="animBg">
+  <div class="background">
+    <div class="aurora"></div>
+    <div class="fog"></div>
+    <div class="streak"></div>
+    <div class="streak two"></div>
+    <div class="particles-bg"></div>
+    <div class="hex-bg"></div>
+    <div class="energy-frame"></div>
+    <div class="left-energy"></div>
+    <div class="right-energy"></div>
+    <div class="corner-light tl"></div>
+    <div class="corner-light tr"></div>
+    <div class="corner-light bl"></div>
+    <div class="corner-light br"></div>
+  </div>
+</div>
+
+<!-- HUD Corners -->
+<div class="hud-corner tl" id="hc1"></div>
+<div class="hud-corner tr" id="hc2"></div>
+<div class="hud-corner bl" id="hc3"></div>
+<div class="hud-corner br" id="hc4"></div>
+
+<!-- 1. Boot Screen -->
+<div id="bootScreen">
+  <div class="boot-scan" id="bootScan"></div>
+  <div class="boot-line" id="bl1">[ SYSTEM INITIALIZING... ]</div>
+  <div class="boot-line" id="bl2">[ LOADING HUD MODULES... ]</div>
+  <div class="boot-line" id="bl3">[ CALIBRATING BROADCAST... ]</div>
+  <div class="boot-line" id="bl4">[ READY ]</div>
+  <div class="boot-bar-wrap"><div class="boot-bar" id="bootBarFill"></div></div>
+</div>
+
+<!-- 2. Cyber Doors -->
+<div id="doorsWrap">
+  <div class="door" id="doorLeft"></div>
+  <div class="door door-right" id="doorRight"></div>
+</div>
+<div class="door-seam" id="doorSeam"></div>
+
+<!-- 3. Energy Sweep -->
+<div id="energySweep">
+  <div class="sweep-beam" id="sweepBeam"></div>
+  <div class="sweep-smoke"></div>
+</div>
+
+<!-- 4. Tournament Intro -->
+<div id="tournamentIntro">
+  <div class="ti-badge" id="tiBadge">Kick Invitational Presents</div>
+  <div class="ti-divider" id="tiDivider"></div>
+  <div class="ti-title" id="tiTitle">POWERED BY 16 ARENA</div>
+  <div class="ti-sub" id="tiSub">CO-POWERED BY NON-STOP GAMING</div>
+  <div class="ti-logo-wrap" id="tiLogo">
+    <img src="assets/asia.png" alt="logo">
+  </div>
+</div>
+
+<!-- 5. MVP Reveal -->
+<div id="mvpReveal">
+  <div class="mvp-glow-ring" style="width:800px;height:800px;top:50%;left:50%;margin:-400px 0 0 -400px;"></div>
+  <div class="mvp-reveal-title" id="mvpRevealTitle"> MVP LEADERBOARD</div>
+  <div class="mvp-cards-container" id="mvpCardsContainer">
+    <!-- Cards injected by JS -->
+  </div>
+  <div class="mvp-hold-bar">
+    <!-- <div class="mvp-hold-label">PRESS TO CONTINUE</div> -->
+    <!-- <button class="mvp-next-btn" id="mvpNextBtn">WINNER REVEAL →</button> -->
+  </div>
+</div>
+
+<!-- 6. Winner Reveal -->
+<div id="winnerReveal">
+  <div class="winner-bg"></div>
+  <canvas id="winnerCanvas"></canvas>
+  <div class="winner-particles-container" id="winnerParticles"></div>
+  <div class="winner-fire" id="wFire1">🔥</div>
+  <div class="winner-trophy" id="winnerTrophy">🏆</div>
+  <div class="winner-fire" id="wFire2">🔥</div>
+  <div class="winner-label" id="winnerLabel">TABLE TOPPER</div>
+  <div class="winner-team-name" id="winnerTeamName">TEAM NAME</div>
+</div>
+
+<!-- 7. Champion Celebration -->
+<div id="celebration">
+  <div class="celeb-bg"></div>
+  <canvas id="celebCanvas"></canvas>
+  <div class="celeb-banner"></div>
+  <div class="celeb-champ-text">🏆 TABLE TOPPERS 🏆</div>
+  <div class="celeb-trophy">🏆</div>
+  <div class="celeb-team" id="celebTeamName">TEAM NAME</div>
+  <div class="celeb-mvp-badge" id="celebMvpBadge">⭐ MVP: —</div>
+  <div class="celeb-hold-bar">
+    <!-- <button class="celeb-next-btn" id="celebNextBtn">📊 POINTS TABLE →</button> -->
+  </div>
+</div>
+
+<!-- 8. Transition Wipe -->
+<div id="transWipe"><div class="wipe-beam" id="wipeBeam"></div></div>
+
+<!-- 9. Points Table iframe -->
+<div id="pointsTableWrap">
+  <div class="pt-header-bar" id="ptHeader"></div>
+  <iframe id="pointsTableFrame" src="" title="Points Table"></iframe>
+  <div class="pt-footer-bar" id="ptFooter"></div>
+</div>
+
+  <!-- 10. Power Off -->
+<div id="powerOff"></div>
+
+<!-- Floating Navigation Bar -->
+<div id="showNavBar" class="show-nav-bar">
+  <button id="showPrevNavBtn" class="show-nav-btn">◄ PREV</button>
+  <button id="showNextNavBtn" class="show-nav-btn">NEXT ►</button>
+</div>
+
+<!-- Hidden navigation buttons for keyboard / remote triggers -->
+<button id="ffShowPrevBtn" style="display:none"></button>
+<button id="ffShowNextBtn" style="display:none"></button>
+
+<script src="show.js"></script>
+</body>
+</html>
