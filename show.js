@@ -118,12 +118,38 @@ function getChampionTeam() {
 
 function getPointsTableUrl() {
   const queryParams = new URLSearchParams(window.location.search);
+  const currentPath = window.location.pathname;
+  const currentDir = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+  const baseUrl = window.location.origin + currentDir;
+  
+  // Try to get the latest overlay data and pass it as parameter
+  try {
+    const store = JSON.parse(localStorage.getItem(FF_OVERLAYS_KEY) || "{}");
+    const keys = Object.keys(store);
+    
+    if (keys.length > 0) {
+      // Get latest overlay
+      const latestKey = keys[keys.length - 1];
+      const latestData = store[latestKey];
+      
+      if (latestData && latestData.teams && latestData.teams.length > 0) {
+        // Encode and pass the data through URL
+        const encodedData = encodeURIComponent(JSON.stringify(latestData));
+        return `${baseUrl}live.html?embed=1&d=${encodedData}`;
+      }
+    }
+  } catch (e) {
+    console.error("Error reading overlay data:", e);
+  }
+  
+  // Fallback to session parameter
   const session = queryParams.get("session");
   const d = queryParams.get("d");
   const params = new URLSearchParams({ embed: "1" });
   if (session) params.set("session", session);
   if (d) params.set("d", d);
-  return `live.html?${params.toString()}`;
+  
+  return `${baseUrl}live.html?${params.toString()}`;
 }
 
 /** Check if total matches processed is a multiple of 6 (6, 12, 18...) */
@@ -641,8 +667,31 @@ async function runPointsTable() {
 
   if (!wrap) return;
 
+  // Ensure overlay data exists in localStorage before loading iframe
+  try {
+    const store = JSON.parse(localStorage.getItem(FF_OVERLAYS_KEY) || "{}");
+    const teamsData = JSON.parse(localStorage.getItem(FF_STORAGE_KEY) || "{}");
+    
+    // If no data, at least initialize empty structure
+    if (Object.keys(store).length === 0 && Object.keys(teamsData).length === 0) {
+      console.warn("No overlay or team data found - using fallback");
+    }
+  } catch (e) {
+    console.error("Error checking localStorage:", e);
+  }
+
   const tableUrl = getPointsTableUrl();
-  if (frame) frame.src = tableUrl;
+  
+  if (frame) {
+    // Clear iframe first
+    frame.src = "about:blank";
+    
+    // Use setTimeout to ensure browser processes the blank state before loading actual content
+    setTimeout(() => {
+      frame.src = tableUrl;
+    }, 100);
+  }
+  
   wrap.style.opacity = 0;
   wrap.style.pointerEvents = "all";
   wrap.style.display = "flex";
@@ -650,7 +699,7 @@ async function runPointsTable() {
   await runTransitionWipe();
 
   await fadeIn(wrap, 800);
-  await wait(500);
+  await wait(1500); // Give iframe extra time to load
   if (header) header.style.opacity = 1;
   await wait(300);
   if (footer) footer.style.opacity = 1;
