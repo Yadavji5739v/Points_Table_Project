@@ -323,13 +323,13 @@ function buildMVPCards(players) {
   const rankLabels = ["#1", "#2", "#3", "#4", "#5"];
   const rankClasses = ["rank-1", "rank-2", "rank-3", "rank-4", "rank-5"];
   const playerImgs = [
-    "../mvp_project_ravi_kumar_yadav-main/assets/1.png",
-    "../mvp_project_ravi_kumar_yadav-main/assets/2.png",
-    "../mvp_project_ravi_kumar_yadav-main/assets/3.png",
-    "../mvp_project_ravi_kumar_yadav-main/assets/1.png",
-    "../mvp_project_ravi_kumar_yadav-main/assets/2.png"
+    "..assets\1.png",
+    "..\assets\2.png",
+    "..\assets\3.png",
+    "..\assets\4.png",
+    "../Points_Table_Project\assets\5.png"
   ];
-  const localImgs = ["assets/1.png", "assets/2.png", "assets/3.png", "assets/1.png", "assets/2.png"];
+  const localImgs = ["assets/1.png", "assets/2.png", "assets/3.png", "assets/4.png", "assets/5.png"];
 
   let list = Array.isArray(players) && players.length ? players : getMVPData();
   if (!list || !list.length) {
