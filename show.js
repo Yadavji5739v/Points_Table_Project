@@ -5,8 +5,7 @@
    ============================================================ */
 
 const FF_MVP_KEY = "ff_mvp_players";
-const FF_OVERLAYS_KEY = "ff_overlays_v1";
-const FF_STORAGE_KEY = "ff_teams_data";
+/* FF_OVERLAYS_KEY and FF_STORAGE_KEY come from overlay-data.js */
 
 // Stage tracking for keyboard navigation
 let ffCurrentStageIndex = -1;
@@ -117,39 +116,53 @@ function getChampionTeam() {
 }
 
 function getPointsTableUrl() {
-  const queryParams = new URLSearchParams(window.location.search);
-  const currentPath = window.location.pathname;
-  const currentDir = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-  const baseUrl = window.location.origin + currentDir;
-  
-  // Try to get the latest overlay data and pass it as parameter
+  const params = new URLSearchParams(window.location.search);
+  const iframeParams = new URLSearchParams({ embed: "1" });
+  const session = params.get("session");
+  const d = params.get("d");
+  if (session) iframeParams.set("session", session);
+  if (d) iframeParams.set("d", d);
+  return `live.html?${iframeParams.toString()}`;
+}
+
+/** Seed localStorage from URL params so OBS (isolated profile) can read overlay data. */
+function seedOverlayFromUrl() {
   try {
+    const params = new URLSearchParams(window.location.search);
+    const d = params.get("d");
+    const session = params.get("session");
+    if (!d) return null;
+
+    const payload = typeof ffDecodePayload === "function"
+      ? ffDecodePayload(d)
+      : JSON.parse(decodeURIComponent(atob(d)));
+
     const store = JSON.parse(localStorage.getItem(FF_OVERLAYS_KEY) || "{}");
-    const keys = Object.keys(store);
-    
-    if (keys.length > 0) {
-      // Get latest overlay
-      const latestKey = keys[keys.length - 1];
-      const latestData = store[latestKey];
-      
-      if (latestData && latestData.teams && latestData.teams.length > 0) {
-        // Encode and pass the data through URL
-        const encodedData = encodeURIComponent(JSON.stringify(latestData));
-        return `${baseUrl}live.html?embed=1&d=${encodedData}`;
-      }
+    const id = session || payload.id || "obs";
+    store[id] = payload;
+    localStorage.setItem(FF_OVERLAYS_KEY, JSON.stringify(store));
+
+    if (session) {
+      localStorage.setItem("ff_live_session_v1", JSON.stringify({
+        id: session,
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 24 * 60 * 60 * 1000
+      }));
     }
+
+    if (payload.title) {
+      const parts = payload.title.split(" ");
+      localStorage.setItem("ff_overlay_title", JSON.stringify({
+        main: parts[0] || payload.title,
+        sub: parts.slice(1).join(" ") || ""
+      }));
+    }
+
+    return payload;
   } catch (e) {
-    console.error("Error reading overlay data:", e);
+    console.error("Failed to seed overlay from URL:", e);
+    return null;
   }
-  
-  // Fallback to session parameter
-  const session = queryParams.get("session");
-  const d = queryParams.get("d");
-  const params = new URLSearchParams({ embed: "1" });
-  if (session) params.set("session", session);
-  if (d) params.set("d", d);
-  
-  return `${baseUrl}live.html?${params.toString()}`;
 }
 
 /** Check if total matches processed is a multiple of 6 (6, 12, 18...) */
@@ -189,11 +202,13 @@ function loadShowFromSession() {
       return data;
     }
 
-    // Try direct 'd' parameter (encoded payload)
+    // Try direct 'd' parameter (encoded payload from overlay-data.js)
     const d = queryParams.get("d");
     if (d) {
       try {
-        const decoded = JSON.parse(decodeURIComponent(atob(d)));
+        const decoded = typeof ffDecodePayload === "function"
+          ? ffDecodePayload(d)
+          : JSON.parse(decodeURIComponent(atob(d)));
         if (decoded.teams && decoded.teams.length) {
           ffChampionTeamName = decoded.teams[0].n || "CHAMPION";
         }
@@ -661,37 +676,13 @@ async function runPointsTable() {
   ffPointsTableShown = true;
 
   const wrap = document.getElementById("pointsTableWrap");
-  const frame = document.getElementById("pointsTableFrame");
   const header = document.getElementById("ptHeader");
   const footer = document.getElementById("ptFooter");
 
   if (!wrap) return;
 
-  // Ensure overlay data exists in localStorage before loading iframe
-  try {
-    const store = JSON.parse(localStorage.getItem(FF_OVERLAYS_KEY) || "{}");
-    const teamsData = JSON.parse(localStorage.getItem(FF_STORAGE_KEY) || "{}");
-    
-    // If no data, at least initialize empty structure
-    if (Object.keys(store).length === 0 && Object.keys(teamsData).length === 0) {
-      console.warn("No overlay or team data found - using fallback");
-    }
-  } catch (e) {
-    console.error("Error checking localStorage:", e);
-  }
+  // iframe src is set on page load (see DOMContentLoaded) with ?d= payload for OBS
 
-  const tableUrl = getPointsTableUrl();
-  
-  if (frame) {
-    // Clear iframe first
-    frame.src = "about:blank";
-    
-    // Use setTimeout to ensure browser processes the blank state before loading actual content
-    setTimeout(() => {
-      frame.src = tableUrl;
-    }, 100);
-  }
-  
   wrap.style.opacity = 0;
   wrap.style.pointerEvents = "all";
   wrap.style.display = "flex";
@@ -699,7 +690,7 @@ async function runPointsTable() {
   await runTransitionWipe();
 
   await fadeIn(wrap, 800);
-  await wait(1500); // Give iframe extra time to load
+  await wait(1500); // Give iframe time to load and render
   if (header) header.style.opacity = 1;
   await wait(300);
   if (footer) footer.style.opacity = 1;
@@ -829,13 +820,21 @@ async function runShow() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Try to load from session first
-  loadShowFromSession();
+  try {
+    // Seed overlay data from URL before anything reads localStorage (OBS fix)
+    seedOverlayFromUrl();
+    loadShowFromSession();
 
-  // Setup keyboard navigation
-  setupKeyboardNavigation();
+    // Preload points table iframe with encoded data params
+    const frame = document.getElementById("pointsTableFrame");
+    if (frame) frame.src = getPointsTableUrl();
 
-  // Run the show
-  runShow();
+    setupKeyboardNavigation();
+    runShow();
+  } catch (err) {
+    console.error("Show failed to start:", err);
+    const fade = document.getElementById("fadeOverlay");
+    if (fade) fade.style.opacity = 0;
+  }
 });
 

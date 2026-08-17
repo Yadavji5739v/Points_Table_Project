@@ -56,14 +56,19 @@
             return result;
           }
 
+          function buildShowLink(result) {
+            const base = new URL("show.html", window.location.href);
+            const sessionId = result.session ? result.session.id : result.payload.id;
+            base.searchParams.set("session", sessionId);
+            base.searchParams.set("d", ffEncodePayload(result.payload));
+            return base.href;
+          }
+
           if (openBtn) {
             openBtn.onclick = () => {
               const result = ensureOverlay();
               if (!result) return;
-              const base = new URL("show.html", window.location.href);
-              const sessionId = result.session ? result.session.id : result.payload.id;
-              base.searchParams.set("session", sessionId);
-              window.open(base.href, "_blank");
+              window.open(buildShowLink(result), "_blank");
             };
           }
 
@@ -71,10 +76,11 @@
             copyBtn.onclick = () => {
               const result = ensureOverlay();
               if (!result) return;
-              navigator.clipboard.writeText(result.obsLink).then(() => {
-                alert("Overlay link copied!");
+              const showLink = buildShowLink(result);
+              navigator.clipboard.writeText(showLink).then(() => {
+                alert("Show link copied! Paste this into OBS Browser Source.");
               }).catch(() => {
-                prompt("Copy this link:", result.obsLink);
+                prompt("Copy this OBS link:", showLink);
               });
             };
           }
