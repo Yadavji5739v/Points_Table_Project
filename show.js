@@ -142,6 +142,24 @@ function seedOverlayFromUrl() {
     store[id] = payload;
     localStorage.setItem(FF_OVERLAYS_KEY, JSON.stringify(store));
 
+    // OBS uses an isolated browser profile, so mirror the URL payload into
+    // the same standings shape used by the regular browser flow.
+    if (payload.teams && payload.teams.length) {
+      const teamsData = {};
+      payload.teams.forEach(team => {
+        const name = team.n || "UNKNOWN TEAM";
+        teamsData[name] = {
+          name,
+          booyah: team.b || 0,
+          games: team.g || 0,
+          kills: team.k || 0,
+          pos: team.p || 0,
+          total: team.t || 0
+        };
+      });
+      localStorage.setItem(FF_STORAGE_KEY, JSON.stringify(teamsData));
+    }
+
     if (session) {
       localStorage.setItem("ff_live_session_v1", JSON.stringify({
         id: session,
@@ -168,17 +186,25 @@ function seedOverlayFromUrl() {
 /** Check if total matches processed is a multiple of 6 (6, 12, 18...) */
 function isMultipleOfSixMatches() {
   try {
-    // Method 1: Check overlay count (each generate = match uploaded)
-    const store = JSON.parse(localStorage.getItem(FF_OVERLAYS_KEY) || "{}") || {};
-    const overlayCount = Object.keys(store).length;
-    if (overlayCount >= 6 && overlayCount % 6 === 0) return true;
-
-    // Method 2: Check total games across all teams
+    // Check total games across all teams. This also works in OBS, where the
+    // copied URL is loaded in an isolated localStorage profile.
     const teamsData = JSON.parse(localStorage.getItem(FF_STORAGE_KEY) || "{}");
     const teams = Object.values(teamsData);
-    if (!teams.length) return false;
-    const maxGames = Math.max(...teams.map(t => t.games || 0));
-    if (maxGames >= 6 && maxGames % 6 === 0) return true;
+    if (teams.length) {
+      const maxGames = Math.max(...teams.map(t => t.games || 0));
+      if (maxGames >= 6 && maxGames % 6 === 0) return true;
+    }
+
+    // Fall back to the payload when storage has not been seeded yet.
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get("d");
+    if (encoded) {
+      const payload = typeof ffDecodePayload === "function"
+        ? ffDecodePayload(encoded)
+        : JSON.parse(decodeURIComponent(atob(encoded)));
+      const maxGames = Math.max(...(payload.teams || []).map(team => team.g || 0));
+      if (maxGames >= 6 && maxGames % 6 === 0) return true;
+    }
 
     return false;
   } catch (e) {
